@@ -1,0 +1,9 @@
+{
+  "name": "@wiziwig/redux",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {},
+  "author": "Evgeniy Demidov",
+  "license": "UNLICENSED"
+}

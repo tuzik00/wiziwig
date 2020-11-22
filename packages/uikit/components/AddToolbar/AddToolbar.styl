@@ -1,0 +1,47 @@
+.AddToolbar
+  display inline-flex
+  align-items center
+  position relative
+
+  &_active
+    & ^[0]__toggle
+      transform rotate(-45deg)
+
+    & ^[0]__buttons
+      display inline-flex
+
+  &__toggle
+    background-color #fe7200
+    width 30px
+    height 30px
+    border-radius 50%
+    display flex
+    align-items center
+    justify-content center
+    box-shadow 0 1px 6px -1px #000
+    cursor pointer
+    transition background-color 250ms ease-in-out, transform 250ms ease-in-out
+
+    &:hover
+      background-color #ee7000
+
+  &__buttons
+    display none
+    overflow hidden
+    border-radius 5px
+    transform translateX(calc(-100% - 10px))
+    box-shadow 0 1px 6px -1px #000
+    position absolute
+
+  &__button
+    padding 5px 15px
+    box-sizing border-box
+    display flex
+    align-items center
+    justify-content center
+    background-color white
+    cursor pointer
+    transition background-color 250ms ease-in-out
+
+    &:hover
+      background-color #e1e1e1

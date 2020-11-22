@@ -1,0 +1,25 @@
+.RemoveWrapper
+  position relative
+
+  &:hover
+    & ^[0]__remove
+      display flex
+
+  &__remove
+    display none
+    position absolute
+    top 0
+    right 0
+    cursor pointer
+    transform translate(30%, -30%)
+    width 25px
+    height 25px
+    border-radius 50%
+    align-items center
+    justify-content center
+    background-color #fe7200
+    transition background-color 250ms ease-in-out
+    box-shadow 0 1px 6px -1px #000
+
+    &:hover
+      background-color rgba(254, 114, 0, 0.9)

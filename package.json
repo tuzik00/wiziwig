@@ -1,0 +1,16 @@
+{
+  "name": "wiziwig",
+  "version": "0.0.1",
+  "description": "",
+  "private": true,
+  "author": "Evgeniy Demidov",
+  "license": "UNLICENSED",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {},
+  "devDependencies": {},
+  "dependencies": {
+    "yarn": "^1.22.5"
+  }
+}

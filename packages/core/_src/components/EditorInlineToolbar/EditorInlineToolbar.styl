@@ -1,0 +1,44 @@
+.EditorInlineToolbar
+  position absolute
+  left -35px
+  transition top 250ms ease-in-out
+
+  &_open
+    & ^[0]__add-btn
+      visibility visible
+
+  &:hover
+    & ^[0]__add-btn
+      visibility visible
+
+  &__add-btn
+    background-color #ccc
+    border-radius 50px
+    width 30px
+    height 30px
+    font-size 21px
+    text-align center
+    color #ffffff
+    display flex
+    justify-content center
+    align-items center
+    cursor pointer
+    transition background-color 250ms ease-in-out
+    visibility hidden
+
+    &:hover
+      background-color #adadad
+
+  &__menu
+    display none
+    position absolute
+    top 0
+    left 35px
+    height 30px
+    border-radius 5px
+
+    &-btn
+      height 100%
+
+    &_open
+      display inline-flex
