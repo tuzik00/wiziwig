@@ -21,7 +21,7 @@ const CardProduct = (props) => {
                 <b>{name}</b>
             </div>
             <div className={cn(`${CardProduct.displayName}__section`, `${CardProduct.displayName}__section_price`)}>
-                {price}
+                {price} руб.
             </div>
             <div className={`${CardProduct.displayName}__section`}>
                 {description}
