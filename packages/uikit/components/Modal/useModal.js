@@ -2,7 +2,7 @@ import React, {useEffect, useContext} from 'react';
 import context from './context';
 
 
-const useModal = (name, props) => {
+const useModal = (name, props = {}) => {
     const {
         data = {},
         onOk = null,

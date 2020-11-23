@@ -59,7 +59,23 @@ const Provider = (props) => {
                     onClose={() => handleClose(modalName)}
                 >
                     <Component
-                        {...(props.data || {})}
+                        modal={{
+                            ...(props.data || {}),
+                            close: () => {
+                                if (props.onClose) {
+                                    props.onClose();
+                                }
+
+                                handleClose(modalName);
+                            },
+                            ok: (data) => {
+                                if (props.onOk) {
+                                    props.onOk(data);
+                                }
+
+                                handleClose(modalName);
+                            },
+                        }}
                     />
                 </Modal>
             );

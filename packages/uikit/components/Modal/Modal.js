@@ -1,6 +1,5 @@
 import React from 'react';
 import cn from 'classnames';
-import Button from '../Button';
 
 import './Modal.styl';
 
@@ -10,7 +9,6 @@ const Modal = (props) => {
         title,
         isOpen,
         onClose,
-        onOk,
         width,
         height,
         index,
@@ -35,29 +33,6 @@ const Modal = (props) => {
 
                 <div className={`${Modal.displayName}__body`}>
                     {children}
-                </div>
-
-                <div className={`${Modal.displayName}__actions`}>
-                    {onOk && (
-                        <Button
-                            onClick={onOk}
-                            color={'orange'}
-                        >
-                            Применить
-                        </Button>
-                    )}
-
-                    {onClose && (
-                        <>
-                            &nbsp;
-                            <Button
-                                onClick={onClose}
-                                color={'green'}
-                            >
-                                Отмена
-                            </Button>
-                        </>
-                    )}
                 </div>
             </div>
 

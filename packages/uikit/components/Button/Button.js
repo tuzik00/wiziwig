@@ -7,6 +7,8 @@ import './Button.styl';
 const Button = (props) => {
     const {
         isBlock,
+        isRight,
+        isCenter,
         onClick,
         color,
     } = props;
@@ -15,7 +17,9 @@ const Button = (props) => {
         <button
             className={cn(Button.displayName, {
                 [`${Button.displayName}_color-${color}`]: !!color,
-                [`${Button.displayName}_block`]: !!isBlock,
+                [`${Button.displayName}_block`]: isBlock,
+                [`${Button.displayName}_center`]: isCenter,
+                [`${Button.displayName}_right`]: isRight,
             })}
             onClick={onClick}
         >
@@ -27,7 +31,8 @@ const Button = (props) => {
 Button.displayName = 'Button';
 
 Button.defaultProps = {
-    onClick: () => {},
+    onClick: () => {
+    },
 };
 
 

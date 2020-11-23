@@ -1,15 +1,13 @@
-.RemoveWrapper
+.ControlWrapper
   position relative
 
   &:hover
-    & ^[0]__remove
+    & ^[0]__remove, & ^[0]__tools
       display flex
 
-  &__remove
+  &__remove, &__tools
+    margin-left 5px
     display none
-    position absolute
-    top 0
-    right 0
     cursor pointer
     transform translate(30%, -30%)
     width 25px
@@ -23,3 +21,12 @@
 
     &:hover
       background-color rgba(254, 114, 0, 0.9)
+
+  &__tools
+    right 30px
+
+  &__controls
+    position absolute
+    top 0
+    right 0
+    display flex

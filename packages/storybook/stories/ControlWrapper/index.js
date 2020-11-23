@@ -1,25 +1,28 @@
 import React from 'react';
-import RemoveWrapper from '@wiziwig/uikit/components/RemoveWrapper';
+import ControlWrapper from '@wiziwig/uikit/components/ControlWrapper';
 import CardUser from '@wiziwig/uikit/components/CardUser';
 
 
 const Example = () => {
     return (
         <>
-            <RemoveWrapper>
+            <ControlWrapper
+                onChange={() => {}}
+                onDelete={() => {}}
+            >
                 <CardUser
                     firstName={'Иванов'}
                     lastName={'Иван'}
                 />
-            </RemoveWrapper>
+            </ControlWrapper>
         </>
     )
 };
 
 
 export default {
-    title: 'RemoveWrapper',
-    component: RemoveWrapper,
+    title: 'ControlWrapper',
+    component: ControlWrapper,
 }
 
 

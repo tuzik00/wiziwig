@@ -1,0 +1,16 @@
+{
+  "name": "@wiziwig/editor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "draft-js": "^0.11.7",
+    "draftjs-md-converter": "^1.4.1",
+    "immutable": "^4.0.0-rc.12"
+  }
+}
