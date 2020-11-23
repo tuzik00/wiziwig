@@ -5,7 +5,10 @@ import Button from '@wiziwig/uikit/components/Button';
 const Example = () => {
     return (
         <>
-            <Button color={'blue'}>
+            <Button
+                isDisabled
+                color={'blue'}
+            >
                 Открыть
             </Button>
             &nbsp;

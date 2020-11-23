@@ -1,31 +1,48 @@
 import React from 'react';
+import {useDispatch} from 'react-redux';
+
+import {useModal} from '@wiziwig/uikit/components/Modal';
 import TwoColumnsLayout from '@wiziwig/uikit/components/Layout/TwoColumns';
 import ControlWrapper from '@wiziwig/uikit/components/ControlWrapper';
-import {useDispatch} from "react-redux";
 import * as reduxBlock from '@wiziwig/redux/modules/blocks';
-import {BLOCK_TYPE, LAYOUT_VIEW_TYPE} from '../../../enums';
 
+import {BLOCK_TYPE} from '../../../enums';
+
+import AsideBlocks from './AsideBlocks';
+import ContentBlocks from './ContentBlocks';
 
 
 const TwoColumns = (props) => {
     const {
         id,
+        type,
+        viewType,
     } = props;
 
     const dispatch = useDispatch();
 
+    const deleteAlert = useModal('deleteAlert', {
+        onOk() {
+            dispatch(reduxBlock.actions.deleteBlock(BLOCK_TYPE.LAYOUT, {id}));
+        }
+    });
+
     return (
-        <ControlWrapper
-            onDelete={() => {
-                dispatch(reduxBlock.actions.deleteBlock(BLOCK_TYPE.LAYOUT, {id}));
-            }}
-        >
+        <ControlWrapper onDelete={deleteAlert.open}>
             <TwoColumnsLayout
                 aside={(
-                    <div>asdasd</div>
+                    <AsideBlocks
+                        type={type}
+                        viewType={viewType}
+                        blockId={id}
+                    />
                 )}
             >
-                <div>asdsd</div>
+                <ContentBlocks
+                    type={type}
+                    viewType={viewType}
+                    blockId={id}
+                />
             </TwoColumnsLayout>
         </ControlWrapper>
     )

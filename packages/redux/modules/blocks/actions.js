@@ -1,5 +1,11 @@
 import uniqueId from 'lodash/uniqueId';
-import { ADD_BLOCK, DELETE_BLOCK, CHANGE_BLOCK } from './types';
+
+import {
+    ADD_BLOCK,
+    ADD_BLOCK_ENTITIES,
+    DELETE_BLOCK,
+    CHANGE_BLOCK,
+} from './types';
 
 
 export const addBlock = (type, data = {}) => {
@@ -29,6 +35,16 @@ export const changeBlock = (type, data = {}) => {
         payload: {
             type,
             ...data
+        }
+    }
+};
+
+export const addBlockEntities = (type, data) => {
+    return {
+        type: ADD_BLOCK_ENTITIES,
+        payload: {
+            type,
+            ...data,
         }
     }
 };

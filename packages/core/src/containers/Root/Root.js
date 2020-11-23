@@ -25,6 +25,7 @@ const Root = () => {
 
             return (
                 <Block
+                    type={block.type}
                     key={block.id}
                     id={block.id}
                     {...blockComp.props}

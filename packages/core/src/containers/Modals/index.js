@@ -1,5 +1,8 @@
 import LayoutBlocks from './LayoutBlocks';
 import ImageUpload from './ImageUpload';
+import DeleteAlert from './DeleteAlert';
+import AsideWidgets from './AsideWidgets';
+import UserCard from './UserCard';
 
 
 export default {
@@ -11,6 +14,18 @@ export default {
         title: 'Загрузите изображение',
         component: ImageUpload,
     },
+    deleteAlert: {
+        title: 'Вы уверены что хотите удалить блок?',
+        component: DeleteAlert,
+    },
+    asideWidgets: {
+        title: 'Виджеты',
+        component: AsideWidgets,
+    },
+    userCard: {
+        title: 'Карточка пользователя',
+        component: UserCard,
+    }
 };
 
 

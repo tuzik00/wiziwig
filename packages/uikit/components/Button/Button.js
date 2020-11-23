@@ -7,6 +7,7 @@ import './Button.styl';
 const Button = (props) => {
     const {
         isBlock,
+        isDisabled,
         isRight,
         isCenter,
         onClick,
@@ -20,7 +21,9 @@ const Button = (props) => {
                 [`${Button.displayName}_block`]: isBlock,
                 [`${Button.displayName}_center`]: isCenter,
                 [`${Button.displayName}_right`]: isRight,
+                [`${Button.displayName}_disabled`]: isDisabled,
             })}
+            disabled={isDisabled}
             onClick={onClick}
         >
             {props.children}

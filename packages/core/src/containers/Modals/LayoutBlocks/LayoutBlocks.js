@@ -29,7 +29,6 @@ const LayoutBlocks = (props) => {
     const handleCreateBlockTwoColumns = useCallback(() => {
         dispatch(reduxBlock.actions.addBlock(BLOCK_TYPE.LAYOUT, {
             viewType: LAYOUT_VIEW_TYPE.TWO_COLUMNS,
-            asideEntities: [],
         }));
 
         modal.close();

@@ -1,4 +1,9 @@
-import { ADD_BLOCK, DELETE_BLOCK, CHANGE_BLOCK } from './types';
+import {
+    ADD_BLOCK,
+    DELETE_BLOCK,
+    CHANGE_BLOCK,
+    ADD_BLOCK_ENTITIES,
+} from './types';
 
 
 const initialState = [];
@@ -23,8 +28,28 @@ export default (state = initialState, action) => {
                         ...block.data,
                         ...action.payload,
                     };
+                }
+            });
 
-                    console.log(block)
+            return [
+                ...state,
+            ];
+
+        case ADD_BLOCK_ENTITIES:
+            const {
+                blockId,
+                viewType,
+                data,
+                insetTo,
+            } = action.payload;
+
+            state.forEach((block) => {
+                if (block.id === blockId) {
+                    if (!block.data[insetTo]) {
+                        block.data[insetTo] = [data];
+                    } else {
+                        block.data[insetTo].push(data);
+                    }
                 }
             });
 

@@ -9,3 +9,12 @@ export const blockList = createSelector(
     state,
     (block) => block,
 );
+
+export const layoutAsideEntities = createSelector(
+    blockList,
+    (blocks) => {
+        return blocks.map((block) => {
+
+        })
+    }
+);
