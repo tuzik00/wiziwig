@@ -1,12 +1,15 @@
 .InlineToolbar
-  display inline-flex
   border-radius 5px
   overflow hidden
   position absolute
-  left 0,
-  top 0
+  left 50%,
+  top 50%
   transition top 250ms ease-in-out, left 250ms ease-in-out
   box-shadow 0 1px 6px -1px #000
+  display none
+
+  &_visible
+    display inline-flex
 
   &__button
     color white

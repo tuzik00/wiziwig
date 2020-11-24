@@ -1,10 +1,11 @@
 import React from 'react';
+import Editor from '@wiziwig/editor';
 
 
 const ContentBlocks = () => {
     return (
         <div>
-            ContentBlocks
+            <Editor/>
         </div>
     );
 };

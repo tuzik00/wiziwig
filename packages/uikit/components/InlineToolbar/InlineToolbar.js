@@ -1,28 +1,33 @@
-import React from 'react';
+import React, {memo} from 'react';
 import cn from 'classnames';
 
 import './InlineToolbar.styl';
 
 
-const InlineToolbar = (props) => {
+const InlineToolbar = React.forwardRef((props, ref) => {
     const {
         items,
         onToggle,
         activeItem,
         position,
+        isVisible,
     } = props;
 
     return (
         <div
-            className={InlineToolbar.displayName}
+            ref={ref}
+            className={cn(InlineToolbar.displayName, {
+                [`${InlineToolbar.displayName}_visible`]: isVisible,
+            })}
             style={{
                 top: position.top,
                 left: position.left,
             }}
         >
-            {items.map((item) => {
+            {items.map((item, index) => {
                 return (
                     <div
+                        key={index}
                         className={cn(`${InlineToolbar.displayName}__button`, {
                             [`${InlineToolbar.displayName}__button_active`]: activeItem === item.label
                         })}
@@ -34,7 +39,7 @@ const InlineToolbar = (props) => {
             })}
         </div>
     )
-};
+});
 
 InlineToolbar.displayName = 'InlineToolbar';
 
@@ -49,4 +54,4 @@ InlineToolbar.defaultProps = {
 };
 
 
-export default InlineToolbar;
+export default memo(InlineToolbar);
