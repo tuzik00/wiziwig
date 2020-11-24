@@ -6,15 +6,31 @@ import Button from '@wiziwig/uikit/components/Button';
 const ModalContent = (props) => {
     return (
         <div>
-            {props.content}
+            {props.modal.test}
+            <button onClick={() => props.modal.ok()}>ok</button>
         </div>
     )
 };
 
 const Body = () => {
     const modal = useModal('example', {
-        onOk() {
-            console.log('ok')
+        data: {
+            test: 1,
+        },
+        onOk(data) {
+            console.log('modal', data)
+        },
+        onCancel() {
+            console.log('cancel')
+        }
+    });
+
+     const modal2 = useModal('example', {
+         data: {
+             test: 2,
+         },
+        onOk(data) {
+            console.log('modal', data)
         },
         onCancel() {
             console.log('cancel')
@@ -31,7 +47,14 @@ const Body = () => {
                 color={'orange'}
                 onClick={() => modal.open()}
             >
-                Открыть
+                modal 1
+            </Button>
+            &nbsp;
+            <Button
+                color={'orange'}
+                onClick={() => modal2.open()}
+            >
+                modal 2
             </Button>
         </div>
     )

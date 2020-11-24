@@ -1,10 +1,28 @@
-import React, {memo} from 'react';
+import React, {memo, useCallback} from 'react';
+import {useDispatch} from 'react-redux';
 import CardHeadings from '@wiziwig/uikit/components/CardHeadings';
+import ControlWrapperCard from '@wiziwig/uikit/components/ControlWrapperCard';
+import * as reduxBlocks from '@wiziwig/redux/modules/blocks';
 
 
-const WidgetNavigations = (data) => {
+const WidgetNavigations = (props) => {
+    const {
+        blockKey,
+    } = props;
+
+    const dispatch = useDispatch();
+
+    const handleDeleteBlock = useCallback(() => {
+        dispatch(reduxBlocks.actions.remove(blockKey));
+    }, []);
+
     return (
-        <CardHeadings/>
+        <ControlWrapperCard
+            isLeft
+            onDelete={handleDeleteBlock}
+        >
+            <CardHeadings/>
+        </ControlWrapperCard>
     )
 };
 

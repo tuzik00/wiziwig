@@ -15,7 +15,6 @@ const ImageUpload = (props) => {
             const src = URL.createObjectURL(file);
 
             modal.ok(src);
-            modal.close();
 
             inputRef.current.value = '';
         }

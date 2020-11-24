@@ -45,6 +45,12 @@ const Root = () => {
                 <CreateBlocks
                     blockList={blockList}
                     renderBlockFn={renderBlockFn}
+                    renderItem={(item) => (
+                        <>
+                            {item}
+                            <br/>
+                        </>
+                    )}
                 />
             </div>
 

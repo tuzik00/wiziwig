@@ -70,29 +70,64 @@ function updateBlock(blocks, blockKey, data = {}, newState = []) {
     return newState;
 }
 
+// если масив пустой
+// если массив полный
+// если ключа нет
+// если ключ есть
+
 function insertBlock(blocks, blockKey = null, addBlock, newState = []) {
-    if (!blockKey && !blocks.length) {
-        newState.push(addBlock);
+    if (blockKey) {
+        for (const key in blocks) {
+            const currentBlock = blocks[key];
 
-        return newState;
-    }
+            const newBlock = {
+                ...currentBlock,
+                entities: [],
+            };
 
-    for (let key in blocks) {
-        const block = blocks[key];
+            newState.push(newBlock);
 
-        const newBlock = {
-            ...block,
-            entities: [],
-        };
+            insertBlock(currentBlock.entities, blockKey, addBlock, newBlock.entities);
 
-        newState.push(newBlock);
-
-        insertBlock(block.entities, blockKey, addBlock, newBlock.entities)
-
-        if (block.key === blockKey) {
-            newBlock.entities.push(addBlock);
+            if (currentBlock.key === blockKey) {
+                newBlock.entities.push(addBlock);
+            }
+        }
+    } else {
+        if (!blocks.length) {
+            newState = [
+                addBlock
+            ];
+        } else {
+            newState = [
+                ...blocks,
+                addBlock,
+            ]
         }
     }
+
+    // if (!blockKey && !blocks.length) {
+    //     newState.push(addBlock);
+    //
+    //     return newState;
+    // }
+    //
+    // for (let key in blocks) {
+    //     const block = blocks[key];
+    //
+    //     const newBlock = {
+    //         ...block,
+    //         entities: [],
+    //     };
+    //
+    //     newState.push(newBlock);
+    //
+    //     insertBlock(block.entities, blockKey, addBlock, newBlock.entities);
+    //
+    //     if (block.key === blockKey) {
+    //         newBlock.entities.push(addBlock);
+    //     }
+    // }
 
     return newState;
 }

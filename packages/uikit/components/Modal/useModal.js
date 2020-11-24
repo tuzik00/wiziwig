@@ -1,4 +1,5 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect, useContext, useState} from 'react';
+import uniqueId from 'lodash/uniqueId';
 import context from './context';
 
 
@@ -19,22 +20,25 @@ const useModal = (name, props = {}) => {
         handleInit,
     } = useContext(context);
 
+    const [id] = useState(() => uniqueId('modal_'));
+
     useEffect(() => {
         handleInit({
+            id,
             name,
+            title,
+            width,
+            height,
             data,
             onOk,
             onClose,
-            width,
-            height,
-            title,
         });
     }, []);
 
     return {
-        isOpen: openModals.some((modalName) => modalName === name),
+        isOpen: true || openModals.some((modalName) => modalName === name),
         open() {
-            handleOpen(name);
+            handleOpen(name, id);
         },
         close() {
             handleClose(name)

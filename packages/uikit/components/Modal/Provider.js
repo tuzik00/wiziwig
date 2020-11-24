@@ -10,53 +10,77 @@ const Provider = (props) => {
         modals,
     } = props;
 
-    const [openModals, pushOpenName] = useState([]);
+    const [openedModals, setOpenModal] = useState([]);
+    const [createdModals, createModal] = useState([]);
 
-    const handleOpen = useCallback((name) => {
-        pushOpenName((names) => {
+    const handleOpen = useCallback((name, id) => {
+        setOpenModal((openModals) => {
             return [
-                ...names,
-                name,
+                ...openModals,
+                {
+                    name,
+                    id,
+                },
             ];
         });
     }, []);
 
-    const handleClose = useCallback((name) => {
-        pushOpenName((names) => {
-            return names.filter((modalName) => modalName !== name);
-        });
+    const handleClose = useCallback((id) => {
+        setOpenModal((openedModals) => openedModals.filter((openModal) => openModal.id !== id));
     }, []);
 
-    const handleInit = useCallback((props) => {
-        if (!modals[props.name]) {
+    const handleInit = useCallback((modalProps) => {
+        if (!modals[modalProps.name]) {
             return;
         }
 
-        modals[props.name].props = props
+        const {
+            component,
+            title,
+        } = modals[modalProps.name];
+
+        createModal((items) => {
+            return [
+                ...items,
+                {
+                    component,
+                    id: modalProps.id,
+                    title: modalProps.title || title,
+                    props: modalProps,
+                }
+            ]
+        })
     }, []);
 
-    const modalsList = useMemo(() => {
-        return Object.keys(modals).map((modalName, index) => {
-            const {
-                component: Component,
-                title,
-                props = {},
-            } = modals[modalName];
 
-            if (!openModals.includes(modalName)){
+    const modalsList = useMemo(() => {
+        return openedModals.map((openedModal, index) => {
+            const {
+                id,
+            } = openedModal;
+
+            const [modal] = createdModals.filter((item) => item.id === id);
+
+            if (!modal) {
                 return null;
             }
 
+            const {
+                component: Component,
+                title,
+                props,
+            } = modal;
+
             return (
                 <Modal
-                    key={modalName}
+                    key={id}
                     index={index + 1}
-                    isOpen={openModals.includes(modalName)}
-                    title={props.title || title}
+                    isOpen
+                    title={title}
                     width={props.width}
                     height={props.height}
                     onOk={props.onOk}
-                    onClose={() => handleClose(modalName)}
+                    onClose={() => handleClose(id)}
                 >
                     <Component
                         modal={{
@@ -66,26 +90,26 @@ const Provider = (props) => {
                                     props.onClose();
                                 }
 
-                                handleClose(modalName);
+                                handleClose(id);
                             },
                             ok: (data) => {
                                 if (props.onOk) {
-                                    props.onOk(data);
+                                    props.onOk(data, props.data);
                                 }
 
-                                handleClose(modalName);
+                                handleClose(id);
                             },
                         }}
                     />
                 </Modal>
-            );
+            )
         });
-    }, [openModals]);
+    }, [openedModals]);
 
     return (
         <Context.Provider
             value={{
-                openModals,
+                openedModals,
                 handleOpen,
                 handleClose,
                 handleInit,

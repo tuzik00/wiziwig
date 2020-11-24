@@ -1,11 +1,11 @@
 import React from 'react';
-import './ControlWrapper.styl';
+import './ControlWrapperCard.styl';
 import IconDustbin from '../svg/dustbin.svg';
 import IconTools from '../svg/tools.svg';
 import cn from 'classnames';
 
 
-const ControlWrapper = (props) => {
+const ControlWrapperCard = (props) => {
     const {
         children,
         onChange,
@@ -14,15 +14,15 @@ const ControlWrapper = (props) => {
     } = props;
 
     return (
-        <div className={ControlWrapper.displayName}>
+        <div className={ControlWrapperCard.displayName}>
             {children}
 
-            <div className={cn(`${ControlWrapper.displayName}__controls`, {
-                [`${ControlWrapper.displayName}__controls_left`]: isLeft,
+            <div className={cn(`${ControlWrapperCard.displayName}__controls`, {
+                [`${ControlWrapperCard.displayName}__controls_left`]: isLeft,
             })}>
                 {onChange && (
                     <div
-                        className={`${ControlWrapper.displayName}__tools`}
+                        className={`${ControlWrapperCard.displayName}__tools`}
                         onClick={onChange}
                     >
                         <IconTools
@@ -35,7 +35,7 @@ const ControlWrapper = (props) => {
 
                 {onDelete && (
                     <div
-                        className={`${ControlWrapper.displayName}__remove`}
+                        className={`${ControlWrapperCard.displayName}__remove`}
                         onClick={onDelete}
                     >
                         <IconDustbin
@@ -50,8 +50,8 @@ const ControlWrapper = (props) => {
     );
 };
 
-ControlWrapper.displayName = 'ControlWrapper';
+ControlWrapperCard.displayName = 'ControlWrapperCard';
 
-ControlWrapper.defaultProps = {};
+ControlWrapperCard.defaultProps = {};
 
-export default ControlWrapper;
+export default ControlWrapperCard;

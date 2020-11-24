@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import './TwoColumns.styl';
 
 
@@ -26,4 +26,4 @@ TwoColumns.displayName = 'TwoColumns';
 TwoColumns.defaultProps = {};
 
 
-export default TwoColumns;
+export default memo(TwoColumns);

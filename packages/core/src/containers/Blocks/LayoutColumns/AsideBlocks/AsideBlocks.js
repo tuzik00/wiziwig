@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo, useCallback} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 import * as reduxBlock from '@wiziwig/redux/modules/blocks';
@@ -18,31 +18,41 @@ const AsideBlocks = (props) => {
 
     const dispatch = useDispatch();
 
-    const asideWidgetsModal = useModal('asideWidgets', {
-        onOk(block) {
-            switch (block.type) {
-                case BLOCK_TYPE.WIDGET_USER:
-                    dispatch(reduxBlock.actions.insert({
-                        type: BLOCK_TYPE.WIDGET_USER,
-                        blockKey,
-                        data: block.data,
-                    }));
+    const addBlock = useCallback((block) => {
+        switch (block.type) {
+            case BLOCK_TYPE.WIDGET_USER:
+                dispatch(reduxBlock.actions.insert({
+                    type: BLOCK_TYPE.WIDGET_USER,
+                    blockKey: block.blockKey,
+                    data: block.data,
+                }));
 
-                    return;
+                return;
 
-                case BLOCK_TYPE.WIDGET_NAVIGATION:
-                    dispatch(reduxBlock.actions.insert({
-                        type: BLOCK_TYPE.WIDGET_NAVIGATION,
-                        blockKey,
-                    }));
+            case BLOCK_TYPE.WIDGET_NAVIGATION:
+                dispatch(reduxBlock.actions.insert({
+                    type: BLOCK_TYPE.WIDGET_NAVIGATION,
+                    blockKey: block.blockKey,
+                }));
 
-                    return;
-            }
+                return;
         }
-    });
+    }, [blockKey]);
+
+    const asideWidgetsModal = useModal('asideWidgets', {
+        data: {
+            blockKey,
+        },
+        onOk(block, propsData) {
+            addBlock({
+                ...block,
+                ...propsData,
+            });
+        }
+    }, [blockKey]);
 
     const blocks = useSelector((state) => {
-        return reduxBlock.selectors.getBlockEntitiesByKey(state, { blockKey })
+        return reduxBlock.selectors.getBlockEntitiesByKey(state, {blockKey})
     });
 
     return (
@@ -74,4 +84,4 @@ const AsideBlocks = (props) => {
 };
 
 
-export default AsideBlocks;
+export default memo(AsideBlocks);

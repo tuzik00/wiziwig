@@ -9,7 +9,7 @@ const CreateBlocks = (props = {}) => {
     } = props;
 
     return useMemo(() => {
-        return blockList.map((item) => {
+        return blockList.map((item, index) => {
             const block = renderBlockFn(item);
 
             if (!block || !block.component) {
