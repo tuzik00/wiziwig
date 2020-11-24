@@ -1,11 +1,10 @@
-import React, {useCallback} from 'react';
+import React, {memo, useCallback} from 'react';
 import {useDispatch} from 'react-redux';
 
 import Button from '@wiziwig/uikit/components/Button';
 import {useModal} from '@wiziwig/uikit/components/Modal';
-import * as reduxBlock from '@wiziwig/redux/modules/blocks';
 
-import {BLOCK_TYPE, LAYOUT_VIEW_TYPE} from '../../../enums';
+import {BLOCK_TYPE} from '../../../enums';
 
 
 const LayoutBlocks = (props) => {
@@ -17,19 +16,21 @@ const LayoutBlocks = (props) => {
 
     const imageUploadModal = useModal('imageUpload', {
         onOk(src) {
-            dispatch(reduxBlock.actions.addBlock(BLOCK_TYPE.LAYOUT, {
-                viewType: LAYOUT_VIEW_TYPE.IMAGE,
-                src,
-            }));
+            modal.ok({
+                type: BLOCK_TYPE.LAYOUT_IMAGE,
+                data: {
+                    src,
+                }
+            });
 
             modal.close();
         }
     });
 
     const handleCreateBlockTwoColumns = useCallback(() => {
-        dispatch(reduxBlock.actions.addBlock(BLOCK_TYPE.LAYOUT, {
-            viewType: LAYOUT_VIEW_TYPE.TWO_COLUMNS,
-        }));
+        modal.ok({
+           type: BLOCK_TYPE.LAYOUT_COLUMNS,
+        });
 
         modal.close();
     }, []);
@@ -68,4 +69,4 @@ const LayoutBlocks = (props) => {
 };
 
 
-export default LayoutBlocks;
+export default memo(LayoutBlocks);

@@ -10,11 +10,33 @@ export const blockList = createSelector(
     (block) => block,
 );
 
-export const layoutAsideEntities = createSelector(
+export const getBlockEntitiesByKey = createSelector(
     blockList,
-    (blocks) => {
-        return blocks.map((block) => {
+    props,
+    (blocks, props) => {
+        const [block] = findBlock((item) => {
+            return item.key === props.blockKey
+        }, blocks);
 
-        })
+        if (block && block.entities) {
+            return block.entities;
+        }
+
+        return [];
     }
 );
+
+
+function findBlock(predicate, arr, filteredArray = []) {
+    for (let i = 0; i < arr.length; i++) {
+        let currentItem = arr[i];
+
+        if (predicate(currentItem)) {
+            filteredArray.push(currentItem);
+        }
+
+        findBlock(predicate, currentItem.entities, filteredArray);
+    }
+
+    return filteredArray;
+}

@@ -4,14 +4,13 @@ export const IMAGE_VIEW_TYPE = {
     FULL_WIDTH: 'full_width',
 };
 
-export const LAYOUT_VIEW_TYPE = {
-    TWO_COLUMNS: 'two_columns',
-    IMAGE: 'image',
-};
-
 export const BLOCK_TYPE = {
-    MARKDOWN: 'markdown', //data = {content = string}
-    IMAGE: 'image', //data = {id = number, description = 'string', view_type = 'IMAGE_VIEW_TYPE', 'img' = 'src'}
-    LAYOUT: 'layout', //data = view_type = LAYOUT_VIEW_TYPE
-    PRODUCT_CARDS: 'product_cards',
+    MARKDOWN: 'markdown', // data = {content = string}
+    IMAGE: 'image', // data = {id = number, description = 'string', view_type = 'IMAGE_VIEW_TYPE', 'img' = 'src'}
+    LAYOUT_COLUMNS: 'layout:columns', // data = view_type = LAYOUT_VIEW_TYPE
+    LAYOUT_COLUMNS_ASIDE: 'layout:columns:aside',
+    LAYOUT_COLUMNS_CONTENT: 'layout:columns:content',
+    LAYOUT_IMAGE: 'layout:image',
+    WIDGET_USER: 'widget:user',
+    WIDGET_NAVIGATION: 'widget:navigation',
 };

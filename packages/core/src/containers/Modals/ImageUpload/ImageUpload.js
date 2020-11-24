@@ -1,4 +1,5 @@
-import React, {useCallback, useRef} from 'react';
+import React, {memo, useCallback, useRef} from 'react';
+
 
 const ImageUpload = (props) => {
     const {
@@ -33,4 +34,4 @@ const ImageUpload = (props) => {
 };
 
 
-export default ImageUpload;
+export default memo(ImageUpload);

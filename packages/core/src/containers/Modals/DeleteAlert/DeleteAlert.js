@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import Button from '@wiziwig/uikit/components/Button';
 
 
@@ -27,4 +27,4 @@ const DeleteAlert = (props) => {
 };
 
 
-export default DeleteAlert;
+export default memo(DeleteAlert);

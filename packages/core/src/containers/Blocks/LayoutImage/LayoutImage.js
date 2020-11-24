@@ -1,15 +1,15 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {useDispatch} from 'react-redux';
+
 import ImageLayout from '@wiziwig/uikit/components/Layout/Image';
 import ControlWrapper from '@wiziwig/uikit/components/ControlWrapper';
 import {useModal} from '@wiziwig/uikit/components/Modal';
 import * as reduxBlock from '@wiziwig/redux/modules/blocks';
-import {BLOCK_TYPE} from '../../../enums';
 
 
-const Image = (props) => {
+const LayoutImage = (props) => {
     const {
-        id,
+        blockKey,
         src,
     } = props;
 
@@ -17,15 +17,17 @@ const Image = (props) => {
 
     const deleteAlert = useModal('deleteAlert', {
        onOk(){
-           dispatch(reduxBlock.actions.deleteBlock(BLOCK_TYPE.LAYOUT, {id}));
+           dispatch(reduxBlock.actions.remove(blockKey));
        }
     });
 
     const imageUploadModal = useModal('imageUpload', {
         onOk(src) {
-            dispatch(reduxBlock.actions.changeBlock(BLOCK_TYPE.LAYOUT, {
-                id,
-                src,
+            dispatch(reduxBlock.actions.update({
+                blockKey,
+                data: {
+                    src,
+                }
             }));
         }
     });
@@ -35,12 +37,10 @@ const Image = (props) => {
             onChange={imageUploadModal.open}
             onDelete={deleteAlert.open}
         >
-            <ImageLayout
-                src={src}
-            />
+            <ImageLayout src={src} />
         </ControlWrapper>
     )
 };
 
 
-export default Image;
+export default memo(LayoutImage);

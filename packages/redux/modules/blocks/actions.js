@@ -1,50 +1,66 @@
 import uniqueId from 'lodash/uniqueId';
 
 import {
-    ADD_BLOCK,
-    ADD_BLOCK_ENTITIES,
-    DELETE_BLOCK,
-    CHANGE_BLOCK,
+    INSERT_BLOCK,
+    REMOVE_BLOCK,
+    UPDATE_BLOCK,
 } from './types';
 
 
-export const addBlock = (type, data = {}) => {
-  return {
-      type: ADD_BLOCK,
-      payload: {
-          id: uniqueId('block_'),
-          type,
-          data,
-      }
-  }
+export const block = {
+    type: null,
+    data: {},
+    entities: [],
 };
 
-export const deleteBlock = (type, data) => {
+export const insert = (props = {}) => {
+    const {
+        type = null,
+        data = {},
+        entities = [],
+        blockKey,
+    } = props;
+
     return {
-        type: DELETE_BLOCK,
+        type: INSERT_BLOCK,
         payload: {
+            key: uniqueId('block_'),
             type,
-            ...data
+            data,
+            entities: entities.map((item) => ({
+                key: uniqueId('block_'),
+                ...block,
+                ...item,
+            })),
+        },
+        meta: {
+            blockKey,
         }
     }
 };
 
-export const changeBlock = (type, data = {}) => {
+export const remove = (key) => {
     return {
-        type: CHANGE_BLOCK,
+        type: REMOVE_BLOCK,
         payload: {
-            type,
-            ...data
+            key,
         }
     }
 };
 
-export const addBlockEntities = (type, data) => {
+export const update = (props = {}) => {
+    const {
+        blockKey,
+        data,
+    } = props;
+
     return {
-        type: ADD_BLOCK_ENTITIES,
+        type: UPDATE_BLOCK,
         payload: {
-            type,
             ...data,
+        },
+        meta: {
+            blockKey,
         }
     }
 };

@@ -1,42 +1,52 @@
-import React, {useMemo} from 'react';
-import {useSelector} from 'react-redux';
+import React, {memo} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import Button from '@wiziwig/uikit/components/Button';
 import IconPlus from '@wiziwig/uikit/components/svg/plus.svg';
 import EditorWrapper from '@wiziwig/uikit/components/Layout/EditorWrapper';
 import {useModal} from '@wiziwig/uikit/components/Modal';
 import * as reduxBlocks from '@wiziwig/redux/modules/blocks';
 
+import {BLOCK_TYPE} from '../../enums';
+import CreateBlocks from '../CreateBlocks';
 import renderBlockFn from '../../renderBlockFn';
 
 
 const Root = () => {
-    const layoutBlockModal = useModal('layoutBlock');
-    const blockList = useSelector(reduxBlocks.selectors.blockList);
+    const dispatch = useDispatch();
 
-    const blocks = useMemo(() => {
-        return blockList.map((block) => {
-            const blockComp = renderBlockFn(block);
+    const layoutBlockModal = useModal('layoutBlock', {
+        onOk(block){
+            switch (block.type) {
+                case BLOCK_TYPE.LAYOUT_COLUMNS:
+                    return dispatch(reduxBlocks.actions.insert({
+                        type: BLOCK_TYPE.LAYOUT_COLUMNS,
+                        entities: [
+                            {type: BLOCK_TYPE.LAYOUT_COLUMNS_CONTENT},
+                            {type: BLOCK_TYPE.LAYOUT_COLUMNS_ASIDE}
+                        ],
+                    }));
 
-            if (!block) {
-                return;
+                case BLOCK_TYPE.LAYOUT_IMAGE:
+                    return dispatch(reduxBlocks.actions.insert({
+                        type: BLOCK_TYPE.LAYOUT_IMAGE,
+                        data: block.data,
+                    }))
             }
 
-            const Block = blockComp.component;
+            layoutBlockModal.close();
+        }
+    });
 
-            return (
-                <Block
-                    type={block.type}
-                    key={block.id}
-                    id={block.id}
-                    {...blockComp.props}
-                />
-            )
-        })
-    }, [blockList]);
+    const blockList = useSelector(reduxBlocks.selectors.blockList);
 
     return (
         <EditorWrapper>
-            {blocks}
+            <div>
+                <CreateBlocks
+                    blockList={blockList}
+                    renderBlockFn={renderBlockFn}
+                />
+            </div>
 
             <div>
                 <br/>
@@ -54,4 +64,4 @@ const Root = () => {
 };
 
 
-export default Root;
+export default memo(Root);

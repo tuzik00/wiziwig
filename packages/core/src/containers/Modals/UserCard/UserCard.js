@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useMemo, useEffect} from 'react';
+import React, {memo, useState, useCallback, useMemo, useEffect} from 'react';
 import Button from '@wiziwig/uikit/components/Button';
 import Input from '@wiziwig/uikit/components/Input';
 
@@ -89,4 +89,4 @@ const UserCard = (props) => {
 };
 
 
-export default UserCard;
+export default memo(UserCard);

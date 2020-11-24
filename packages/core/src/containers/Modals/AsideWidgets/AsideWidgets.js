@@ -1,6 +1,7 @@
-import React, {useCallback} from 'react';
+import React, {memo, useCallback} from 'react';
 import Button from '@wiziwig/uikit/components/Button';
 import {useModal} from '@wiziwig/uikit/components/Modal';
+import {BLOCK_TYPE} from '../../../enums';
 
 
 const AsideWidgets = (props) => {
@@ -10,12 +11,12 @@ const AsideWidgets = (props) => {
 
     const userCardModal = useModal('userCard', {
         onOk(data) {
-            modal.ok({type: 'user', data});
+            modal.ok({type: BLOCK_TYPE.WIDGET_USER, data});
         }
     });
 
     const handleAddNavigations = useCallback(() => {
-        modal.ok({type: 'navigations'})
+        modal.ok({type: BLOCK_TYPE.WIDGET_NAVIGATION})
     }, []);
 
     return (
@@ -52,4 +53,4 @@ const AsideWidgets = (props) => {
 };
 
 
-export default AsideWidgets;
+export default memo(AsideWidgets);

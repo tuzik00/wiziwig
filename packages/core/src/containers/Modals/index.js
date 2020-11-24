@@ -27,8 +27,3 @@ export default {
         component: UserCard,
     }
 };
-
-
-export {
-    LayoutBlocks,
-}

@@ -1,33 +1,9 @@
-import {BLOCK_TYPE, LAYOUT_VIEW_TYPE} from './enums';
-import TwoColumnsLayout from './containers/Layout/TwoColumns';
-import ImageLayout from './containers/Layout/Image';
+import {BLOCK_TYPE} from './enums';
+import LayoutImage from './containers/Blocks/LayoutImage';
+import LayoutColumns from './containers/Blocks/LayoutColumns';
+import WidgetNavigations from './containers/Blocks/WidgetNavigations';
+import WidgetUser from './containers/Blocks/WidgetUser';
 
-
-const renderLayoutViewType = (block) => {
-    const {
-        data,
-    } = block;
-
-    switch (data.viewType) {
-        case LAYOUT_VIEW_TYPE.TWO_COLUMNS:
-            return {
-                component: TwoColumnsLayout,
-                props: {
-                    ...block.data,
-                },
-            };
-
-        case LAYOUT_VIEW_TYPE.IMAGE:
-            return {
-                component: ImageLayout,
-                props: {
-                    ...block.data,
-                },
-            };
-        default:
-            break;
-    }
-};
 
 export default (block) => {
     const {
@@ -35,10 +11,27 @@ export default (block) => {
     } = block;
 
     switch (type) {
-        case BLOCK_TYPE.LAYOUT:
-            return renderLayoutViewType(block);
+        case BLOCK_TYPE.LAYOUT_IMAGE:
+            return {
+                component: LayoutImage,
+            };
+
+        case BLOCK_TYPE.LAYOUT_COLUMNS:
+            return {
+                component: LayoutColumns,
+            };
+
+        case BLOCK_TYPE.WIDGET_NAVIGATION:
+            return {
+                component: WidgetNavigations,
+            };
+
+        case BLOCK_TYPE.WIDGET_USER:
+            return {
+                component: WidgetUser,
+            };
 
         default:
-            break;
+            return null;
     }
 }
