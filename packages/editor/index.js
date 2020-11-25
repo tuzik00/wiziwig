@@ -16,18 +16,16 @@ const Root = () => {
         return EditorState.createEmpty()
     });
 
-    const [isFocus, setFocus] = useState(false);
-
     const handleChangeState = useCallback((newEditorState) => {
         setEditorState(newEditorState);
     }, []);
 
     const handleFocus = useCallback(() => {
-        setFocus(true);
+
     }, []);
 
     const handleBlur = useCallback(() => {
-        setFocus(false);
+
     }, []);
 
     useEffect(() => {
@@ -45,7 +43,6 @@ const Root = () => {
             />
 
             <InlineToolbar
-                isFocus={isFocus}
                 editorState={editorState}
                 onToggle={handleChangeState}
             />

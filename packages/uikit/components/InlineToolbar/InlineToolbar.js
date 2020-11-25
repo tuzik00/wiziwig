@@ -6,9 +6,11 @@ import './InlineToolbar.styl';
 
 const InlineToolbar = React.forwardRef((props, ref) => {
     const {
-        items,
-        onToggle,
-        activeItem,
+        inlineItems,
+        blockItems,
+        onToggleInline,
+        onToggleBlock,
+        activeItems,
         position,
         isVisible,
     } = props;
@@ -24,14 +26,28 @@ const InlineToolbar = React.forwardRef((props, ref) => {
                 left: position.left,
             }}
         >
-            {items.map((item, index) => {
+            {blockItems.map((item, index) => {
                 return (
                     <div
                         key={index}
                         className={cn(`${InlineToolbar.displayName}__button`, {
-                            [`${InlineToolbar.displayName}__button_active`]: activeItem === item.label
+                            [`${InlineToolbar.displayName}__button_active`]: activeItems.includes(item.label)
                         })}
-                        onClick={() => onToggle(item)}
+                        onClick={() => onToggleBlock(item.label)}
+                    >
+                        {item.title}
+                    </div>
+                )
+            })}
+
+            {inlineItems.map((item, index) => {
+                return (
+                    <div
+                        key={index}
+                        className={cn(`${InlineToolbar.displayName}__button`, {
+                            [`${InlineToolbar.displayName}__button_active`]: activeItems.includes(item.label)
+                        })}
+                        onClick={() => onToggleInline(item.label)}
                     >
                         {item.title}
                     </div>
@@ -44,9 +60,11 @@ const InlineToolbar = React.forwardRef((props, ref) => {
 InlineToolbar.displayName = 'InlineToolbar';
 
 InlineToolbar.defaultProps = {
-    onToggle: () => {},
-    activeItem: null,
-    items: [],
+    onToggleInline: () => {},
+    onToggleBlock: () => {},
+    activeItems: null,
+    inlineItems: [],
+    blockItems: [],
     position: {
         left: 0,
         top: 0,

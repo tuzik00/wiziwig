@@ -1,4 +1,5 @@
 import React, {useEffect, useMemo, useRef, useState, useCallback} from 'react';
+import {RichUtils} from 'draft-js';
 import InlineToolbar from '@wiziwig/uikit/components/InlineToolbar';
 import inlineToolbarButtons from '../../config/inlineToolbarButtons';
 import {getSelection, getSelectionRect} from "../../utils/selection";
@@ -8,7 +9,6 @@ import './InlineToolbar.styl';
 
 const _InlineToolbar = (props) => {
     const {
-        isFocus,
         editorState,
         onToggle,
     } = props;
@@ -16,14 +16,18 @@ const _InlineToolbar = (props) => {
     const toolbarRef = useRef(null);
 
     const isVisible = useMemo(() => {
-        return !editorState.getSelection().isCollapsed() && isFocus;
-    }, [editorState, isFocus]);
+        return !editorState.getSelection().isCollapsed();
+    }, [editorState]);
 
     const [position, setPosition] = useState({left: 0, right: 0});
 
-    const handleToggle = useCallback((item) => {
-        console.log(item);
-    }, []);
+    const handleToggleInline = useCallback((type) => {
+        onToggle(RichUtils.toggleInlineStyle(editorState, type));
+    }, [editorState]);
+
+    const handleToggleBlock = useCallback((type) => {
+        onToggle(RichUtils.toggleBlockType(editorState, type));
+    }, [editorState]);
 
     useEffect(() => {
         if (!isVisible) {
@@ -55,13 +59,21 @@ const _InlineToolbar = (props) => {
         setPosition({top, left});
     }, [isVisible]);
 
+    const {
+        inline,
+        blocks,
+    } = inlineToolbarButtons;
+
     return (
         <InlineToolbar
             ref={toolbarRef}
             isVisible={isVisible}
-            items={inlineToolbarButtons}
+            inlineItems={inline}
+            blockItems={blocks}
             position={position}
-            onToggle={handleToggle}
+            activeItems={[]}
+            onToggleInline={handleToggleInline}
+            onToggleBlock={handleToggleBlock}
         />
     )
 };
