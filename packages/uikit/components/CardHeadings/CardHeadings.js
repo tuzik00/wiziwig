@@ -14,15 +14,19 @@ const CardHeadings = (props) => {
             </div>
 
             {headings.map((item, index) => (
-               <div className={`${CardHeadings.displayName}__item`}>
-                   {index + 1}. &nbsp;
-                   <a
-                       className={`${CardHeadings.displayName}__item-link`}
-                       href={`#${item.type}`}
-                   >
-                       {item.text}
-                   </a>
-               </div>
+                <div
+                    key={index}
+                    className={`${CardHeadings.displayName}__item`}
+                >
+                    {index + 1}. &nbsp;
+
+                    <a
+                        className={`${CardHeadings.displayName}__item-link`}
+                        href={`#${item.type}`}
+                    >
+                        {item.text}
+                    </a>
+                </div>
             ))}
         </div>
     );

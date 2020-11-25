@@ -1,15 +1,24 @@
 import {createSelector} from 'reselect';
 import * as module from './';
+import {MODULE_NAME} from '../enums';
 
 
-export const state = (state) => state[module.Enums.MODULE_NAME];
+export const state = (state) => state[MODULE_NAME][module.Enums.MODULE_NAME];
 export const props = (state, props = {}) => props;
 
 export const headings = createSelector(
     state,
-    (headings) => {
-        console.log(headings);
+    (headings = []) => {
+        if (!headings) {
+            return [];
+        }
 
-        return []
+        return Object.keys(headings)
+            .reduce((accum, item) => {
+                return [
+                    ...accum,
+                    ...headings[item],
+                ];
+            }, [])
     },
 );
