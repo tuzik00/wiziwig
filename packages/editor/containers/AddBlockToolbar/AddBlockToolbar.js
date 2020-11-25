@@ -51,6 +51,8 @@ const _AddBlockToolbar = (props) => {
     });
 
     const handleSelect = useCallback((block) => {
+        setVisible(false);
+
         switch (block.type) {
             case 'image':
                 imageModal.open();
