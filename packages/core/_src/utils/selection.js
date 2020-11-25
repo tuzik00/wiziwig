@@ -34,7 +34,6 @@ export const getSelectedBlockNode = (root) => {
     }
 
     let node = selection.getRangeAt(0).startContainer;
-    console.log(node)
     do {
         if (node.getAttribute && node.getAttribute('data-block') === 'true') {
             return node;

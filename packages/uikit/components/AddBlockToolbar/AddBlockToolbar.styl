@@ -1,7 +1,11 @@
-.AddToolbar
+.AddBlockToolbar
   display inline-flex
   align-items center
-  position relative
+  position absolute
+  top 0
+  left 0
+
+  transition top 250ms ease-in-out
 
   &_active
     & ^[0]__toggle

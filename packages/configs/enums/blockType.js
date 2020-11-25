@@ -1,10 +1,4 @@
-export const IMAGE_VIEW_TYPE = {
-    NORMAL: 'normal',
-    MAIN: 'main',
-    FULL_WIDTH: 'full_width',
-};
-
-export const BLOCK_TYPE = {
+export default {
     MARKDOWN: 'markdown', // data = {content = string}
     IMAGE: 'image', // data = {id = number, description = 'string', view_type = 'IMAGE_VIEW_TYPE', 'img' = 'src'}
     LAYOUT_COLUMNS: 'layout:columns', // data = view_type = LAYOUT_VIEW_TYPE
@@ -13,4 +7,6 @@ export const BLOCK_TYPE = {
     LAYOUT_IMAGE: 'layout:image',
     WIDGET_USER: 'widget:user',
     WIDGET_NAVIGATION: 'widget:navigation',
+    PRODUCT_SLIDER: 'product_slider',
+    QUESTION: 'question',
 };

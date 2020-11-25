@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, memo} from 'react';
 import cn from 'classnames';
 import IconPlus from '../svg/plus.svg';
 
-import './AddToolbar.styl';
+import './AddBlockToolbar.styl';
 
 
-const AddToolbar = (props) => {
+const AddBlockToolbar = React.forwardRef((props, ref) => {
     const {
         items,
         onSelect,
@@ -16,18 +16,20 @@ const AddToolbar = (props) => {
 
     return (
         <div
-            className={cn(AddToolbar.displayName, {
-                [`${AddToolbar.displayName}_active`]: isActive,
+            ref={ref}
+            className={cn(AddBlockToolbar.displayName, {
+                [`${AddBlockToolbar.displayName}_active`]: isActive,
             })}
             style={{
                 left: position.left,
                 top: position.top,
             }}
         >
-            <div className={cn(`${AddToolbar.displayName}__buttons`)}>
-                {items.map((item) => (
+            <div className={cn(`${AddBlockToolbar.displayName}__buttons`)}>
+                {items.map((item, index) => (
                     <div
-                        className={cn(`${AddToolbar.displayName}__button`)}
+                        key={index}
+                        className={cn(`${AddBlockToolbar.displayName}__button`)}
                         onClick={() => onSelect(item)}
                     >
                         {item.title}
@@ -36,7 +38,7 @@ const AddToolbar = (props) => {
             </div>
 
             <div
-                className={cn(`${AddToolbar.displayName}__toggle`)}
+                className={cn(`${AddBlockToolbar.displayName}__toggle`)}
                 onClick={() => setActive(!isActive)}
             >
                 <IconPlus
@@ -47,12 +49,12 @@ const AddToolbar = (props) => {
             </div>
         </div>
     )
-};
+});
 
 
-AddToolbar.displayName = 'AddToolbar';
+AddBlockToolbar.displayName = 'AddBlockToolbar';
 
-AddToolbar.defaultProps = {
+AddBlockToolbar.defaultProps = {
     items: [],
     onSelect: () => {},
     position: {
@@ -62,4 +64,4 @@ AddToolbar.defaultProps = {
 };
 
 
-export default AddToolbar;
+export default memo(AddBlockToolbar);

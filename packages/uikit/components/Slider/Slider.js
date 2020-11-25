@@ -17,7 +17,7 @@ const Slider = (props) => {
             return;
         }
 
-        const glider = new Glider(sliderRef.current, {
+        new Glider(sliderRef.current, {
             slidesToShow: 4,
             slidesToScroll: 'auto',
         });

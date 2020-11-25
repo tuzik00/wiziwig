@@ -1,10 +1,10 @@
-import React, {useEffect, useMemo, useRef, useState, useCallback} from 'react';
+import React, {memo, useEffect, useMemo, useRef, useState, useCallback} from 'react';
 import {RichUtils} from 'draft-js';
-import InlineToolbar from '@wiziwig/uikit/components/InlineToolbar';
-import inlineToolbarButtons from '../../config/inlineToolbarButtons';
-import {getSelection, getSelectionRect} from "../../utils/selection";
+import {getSelectionInlineStyle, getSelectedBlocksType} from 'draftjs-utils';
 
-import './InlineToolbar.styl';
+import InlineToolbar from '@wiziwig/uikit/components/InlineToolbar';
+import inlineToolbarButtons from '@wiziwig/configs/enums/inlineToolbarButtons';
+import {getSelection, getSelectionRect} from '../../utils/selection';
 
 
 const _InlineToolbar = (props) => {
@@ -17,6 +17,15 @@ const _InlineToolbar = (props) => {
 
     const isVisible = useMemo(() => {
         return !editorState.getSelection().isCollapsed();
+    }, [editorState]);
+
+
+    const activeSelectionStyles = useMemo(() => {
+        const selectionInlineStyle = getSelectionInlineStyle(editorState);
+        const usedSelectionInlineStyles = Object.keys(selectionInlineStyle)
+            .filter((item) => selectionInlineStyle[item]);
+
+        return [getSelectedBlocksType(editorState), ...usedSelectionInlineStyles]
     }, [editorState]);
 
     const [position, setPosition] = useState({left: 0, right: 0});
@@ -71,7 +80,7 @@ const _InlineToolbar = (props) => {
             inlineItems={inline}
             blockItems={blocks}
             position={position}
-            activeItems={[]}
+            activeItems={activeSelectionStyles}
             onToggleInline={handleToggleInline}
             onToggleBlock={handleToggleBlock}
         />
@@ -79,4 +88,4 @@ const _InlineToolbar = (props) => {
 };
 
 
-export default _InlineToolbar;
+export default memo(_InlineToolbar);

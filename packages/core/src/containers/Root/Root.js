@@ -6,7 +6,7 @@ import EditorWrapper from '@wiziwig/uikit/components/Layout/EditorWrapper';
 import {useModal} from '@wiziwig/uikit/components/Modal';
 import * as reduxBlocks from '@wiziwig/redux/modules/blocks';
 
-import {BLOCK_TYPE} from '../../enums';
+import BLOCK_TYPE from '@wiziwig/configs/enums/blockType';
 import CreateBlocks from '../CreateBlocks';
 import renderBlockFn from '../../renderBlockFn';
 

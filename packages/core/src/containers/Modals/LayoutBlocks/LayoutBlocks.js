@@ -3,8 +3,7 @@ import {useDispatch} from 'react-redux';
 
 import Button from '@wiziwig/uikit/components/Button';
 import {useModal} from '@wiziwig/uikit/components/Modal';
-
-import {BLOCK_TYPE} from '../../../enums';
+import BLOCK_TYPE from '@wiziwig/configs/enums/blockType';
 
 
 const LayoutBlocks = (props) => {

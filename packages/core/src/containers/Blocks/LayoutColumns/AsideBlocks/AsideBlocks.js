@@ -5,8 +5,8 @@ import * as reduxBlock from '@wiziwig/redux/modules/blocks';
 import Button from '@wiziwig/uikit/components/Button';
 import {useModal} from '@wiziwig/uikit/components/Modal';
 import IconPlus from '@wiziwig/uikit/components/svg/plus.svg';
+import BLOCK_TYPE from '@wiziwig/configs/enums/blockType';
 
-import {BLOCK_TYPE} from '../../../../enums';
 import CreateBlocks from '../../../CreateBlocks/CreateBlocks';
 import renderBlockFn from '../../../../renderBlockFn';
 

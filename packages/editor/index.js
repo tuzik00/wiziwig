@@ -7,9 +7,14 @@ import {
 
 import EditorWrapper from './components/EditorWrapper';
 import InlineToolbar from './containers/InlineToolbar';
+import AddBlockToolbar from './containers/AddBlockToolbar';
 
 
-const Root = () => {
+const Root = (props) => {
+    const {
+        renderBlockFn
+    } = props;
+
     const editorRef = useRef(null);
 
     const [editorState, setEditorState] = useState(() => {
@@ -37,6 +42,7 @@ const Root = () => {
             <Editor
                 ref={editorRef}
                 editorState={editorState}
+                blockRendererFn={renderBlockFn}
                 onChange={handleChangeState}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
@@ -45,6 +51,11 @@ const Root = () => {
             <InlineToolbar
                 editorState={editorState}
                 onToggle={handleChangeState}
+            />
+
+            <AddBlockToolbar
+                editorState={editorState}
+                onSelect={handleChangeState}
             />
         </EditorWrapper>
     )

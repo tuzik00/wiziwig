@@ -1,23 +1,31 @@
-import React, {memo, useCallback} from 'react';
+import React from 'react';
 import Button from '@wiziwig/uikit/components/Button';
 import {useModal} from '@wiziwig/uikit/components/Modal';
 import BLOCK_TYPE from '@wiziwig/configs/enums/blockType';
 
 
-const AsideWidgets = (props) => {
+const BlockTypes = (props) => {
     const {
         modal,
     } = props;
 
-    const userCardModal = useModal('userCard', {
-        onOk(data) {
-            modal.ok({type: BLOCK_TYPE.WIDGET_USER, data});
+    const productCreatorModal = useModal('productCreator', {
+        onOk(data){
+            modal.ok({
+                type: BLOCK_TYPE.PRODUCT_SLIDER,
+                data,
+            })
         }
     });
 
-    const handleAddNavigations = useCallback(() => {
-        modal.ok({type: BLOCK_TYPE.WIDGET_NAVIGATION})
-    }, []);
+    const questionModal = useModal('question', {
+        onOk(data){
+            modal.ok({
+                type: BLOCK_TYPE.QUESTION,
+                data,
+            })
+        }
+    });
 
     return (
         <div>
@@ -25,23 +33,23 @@ const AsideWidgets = (props) => {
                 <Button
                     isBlock
                     color={'blue'}
-                    onClick={userCardModal.open}
+                    onClick={productCreatorModal.open}
                 >
-                    Карточка пользователя
+                    Карусель с карточками
                 </Button>
                 <br/>
                 <Button
                     isBlock
-                    onClick={handleAddNavigations}
                     color={'blue'}
+                    onClick={questionModal.open}
                 >
-                    Навигация
+                    Опрос
                 </Button>
-                <br/>
             </div>
-
-            <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+            <div>
+                <br/>
                 <Button
+                    isRight
                     onClick={modal.close}
                     color={'green'}
                 >
@@ -49,8 +57,8 @@ const AsideWidgets = (props) => {
                 </Button>
             </div>
         </div>
-    )
+    );
 };
 
 
-export default memo(AsideWidgets);
+export default BlockTypes;

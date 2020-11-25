@@ -1,5 +1,5 @@
 import React from 'react';
-import AddToolbar from '@wiziwig/uikit/components/AddToolbar';
+import AddBlockToolbar from '@wiziwig/uikit/components/AddBlockToolbar';
 import IconImage from '@wiziwig/uikit/components/svg/image.svg';
 import IconBlock from '@wiziwig/uikit/components/svg/blocks.svg';
 
@@ -7,7 +7,7 @@ import IconBlock from '@wiziwig/uikit/components/svg/blocks.svg';
 const Example = () => {
     return (
         <>
-            <AddToolbar
+            <AddBlockToolbar
                 position={{
                     left: 150
                 }}
@@ -26,7 +26,7 @@ const Example = () => {
 
 export default {
     title: 'AddToolbar',
-    component: AddToolbar,
+    component: AddBlockToolbar,
 }
 
 

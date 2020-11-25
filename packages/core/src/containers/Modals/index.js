@@ -3,11 +3,26 @@ import ImageUpload from './ImageUpload';
 import DeleteAlert from './DeleteAlert';
 import AsideWidgets from './AsideWidgets';
 import UserCard from './UserCard';
+import BlockTypes from './BlockTypes';
+import ProductCreator from './ProductCreator';
+import Questions from './Questions';
 
 
 export default {
-    layoutBlock: {
+    question: {
+        title: 'Создайте опрос',
+        component: Questions,
+    },
+    productCreator: {
+        title: 'Добавьте id товаров',
+        component: ProductCreator,
+    },
+    blockTypes: {
         title: 'Выберите тип блока',
+        component: BlockTypes,
+    },
+    layoutBlock: {
+        title: 'Выберите тип лэйаута',
         component: LayoutBlocks,
     },
     imageUpload: {

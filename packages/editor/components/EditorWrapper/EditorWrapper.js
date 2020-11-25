@@ -13,7 +13,7 @@ const EditorWrapper = (props) => {
     )
 };
 
-EditorWrapper.displayName = 'EditorWrapper';
+EditorWrapper.displayName = 'EditorWrapperText';
 
 
 export default EditorWrapper;
