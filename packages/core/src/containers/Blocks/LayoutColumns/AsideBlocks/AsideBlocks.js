@@ -56,7 +56,7 @@ const AsideBlocks = (props) => {
     });
 
     return (
-        <div>
+        <>
             <CreateBlocks
                 blockList={blocks}
                 renderBlockFn={renderBlockFn}
@@ -79,7 +79,7 @@ const AsideBlocks = (props) => {
                     Создать виджет &nbsp; <IconPlus width={10} height={10} fill={'white'}/>
                 </Button>
             </div>
-        </div>
+        </>
     );
 };
 
