@@ -33,9 +33,6 @@ export default (e) => {
       }
     }
 
-
-    console.log(e);
-
     switch (e.which) {
       // 1
       case 49: return changeType('ordered-list-item');

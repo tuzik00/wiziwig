@@ -3,8 +3,8 @@ import Question from '@wiziwig/uikit/components/Question';
 
 
 const _Question = (props) => {
-    const { block } = props;
-    const question = block.getData();
+    const {block} = props;
+    const {question} = block.getData().toJS();
     const [isAnswered, setAnswered] = useState(false);
 
     return (

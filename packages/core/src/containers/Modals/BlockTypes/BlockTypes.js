@@ -19,10 +19,12 @@ const BlockTypes = (props) => {
     });
 
     const questionModal = useModal('question', {
-        onOk(data){
+        onOk(question){
             modal.ok({
                 type: BLOCK_TYPE.QUESTION,
-                data,
+                data: {
+                    question
+                },
             })
         }
     });

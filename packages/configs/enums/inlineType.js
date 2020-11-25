@@ -1,0 +1,8 @@
+export default {
+    BOLD: 'BOLD',
+    CODE: 'CODE',
+    ITALIC: 'ITALIC',
+    STRIKETHROUGH: 'STRIKETHROUGH',
+    UNDERLINE: 'UNDERLINE',
+    HIGHLIGHT: 'HIGHLIGHT',
+}

@@ -4,9 +4,9 @@ import LayoutImage from './containers/Blocks/LayoutImage';
 import LayoutColumns from './containers/Blocks/LayoutColumns';
 import WidgetNavigations from './containers/Blocks/WidgetNavigations';
 import WidgetUser from './containers/Blocks/WidgetUser';
-import Question from './containers/EditorBlocks/Question';
-import ProductSlider from './containers/EditorBlocks/ProductSlider';
-import Image from './containers/EditorBlocks/Image';
+import Question from '@wiziwig/editor/containers/Blocks/Question';
+import ProductSlider from '@wiziwig/editor/containers/Blocks/ProductSlider';
+import Image from '@wiziwig/editor/containers/Blocks/Image';
 
 
 export default (block) => {
@@ -24,6 +24,7 @@ export default (block) => {
         case BLOCK_TYPE.IMAGE:
             return {
                 component: Image,
+                editable: false,
             };
 
         case BLOCK_TYPE.QUESTION:

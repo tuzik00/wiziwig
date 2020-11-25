@@ -20,6 +20,7 @@ const _AddBlockToolbar = (props) => {
 
     const [isVisible, setVisible] = useState(false);
     const [topPosition, setTopPosition] = useState(0);
+    const [block, setBlock] = useState(null);
 
     const [blockKey, setBlockKey] = useState(null);
     const [blockType, setBlockType] = useState(null);
@@ -29,6 +30,12 @@ const _AddBlockToolbar = (props) => {
         onSelect(addNewBlock(editorState, block.type, block.data));
     }, [editorState]);
 
+    useEffect(() => {
+        if (block) {
+            handleAddBlock(block);
+        }
+    }, [block]);
+
     const imageModal = useModal('imageUpload', {
         data: {
             viewTypes: [
@@ -37,7 +44,7 @@ const _AddBlockToolbar = (props) => {
             ]
         },
         onOk(src){
-            handleAddBlock({
+            setBlock({
                 type: BLOCK_TYPE.IMAGE,
                 data: src,
             });
@@ -46,7 +53,7 @@ const _AddBlockToolbar = (props) => {
 
     const blockTypesModal = useModal('blockTypes', {
         onOk(data) {
-            handleAddBlock(data);
+            setBlock(data);
         }
     });
 
