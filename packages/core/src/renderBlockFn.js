@@ -6,6 +6,7 @@ import WidgetNavigations from './containers/Blocks/WidgetNavigations';
 import WidgetUser from './containers/Blocks/WidgetUser';
 import Question from './containers/EditorBlocks/Question';
 import ProductSlider from './containers/EditorBlocks/ProductSlider';
+import Image from './containers/EditorBlocks/Image';
 
 
 export default (block) => {
@@ -18,6 +19,11 @@ export default (block) => {
             return {
                 component: ProductSlider,
                 editable: false,
+            };
+
+        case BLOCK_TYPE.IMAGE:
+            return {
+                component: Image,
             };
 
         case BLOCK_TYPE.QUESTION:

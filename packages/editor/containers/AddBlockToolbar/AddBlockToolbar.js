@@ -4,6 +4,8 @@ import AddBlockToolbar from '@wiziwig/uikit/components/AddBlockToolbar';
 import {getSelectedBlockNode} from "@wiziwig/core/_src/utils/selection";
 import {useModal} from '@wiziwig/uikit/components/Modal';
 import blockToolbarButtons from "@wiziwig/configs/enums/blockToolbarButtons";
+import BLOCK_TYPE from '@wiziwig/configs/enums/blockType';
+import IMAGE_VIEW_TYPE from '@wiziwig/configs/enums/imageViewType';
 
 import {addNewBlock} from '../../utils/blocks';
 
@@ -28,8 +30,17 @@ const _AddBlockToolbar = (props) => {
     }, [editorState]);
 
     const imageModal = useModal('imageUpload', {
-        onOk(data){
-            handleAddBlock(data);
+        data: {
+            viewTypes: [
+                {name: 'На всю ширину', label: IMAGE_VIEW_TYPE.FULL_WIDTH},
+                {name: 'Нормальная', label: IMAGE_VIEW_TYPE.NORMAL},
+            ]
+        },
+        onOk(src){
+            handleAddBlock({
+                type: BLOCK_TYPE.IMAGE,
+                data: src,
+            });
         }
     });
 
