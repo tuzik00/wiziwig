@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "start": "start-storybook -p 9001 -c config",
-    "build": "build-storybook -c config -o public"
+    "build": "build-storybook -c config -o public",
+    "publish": "npm run build && gh-pages -d public"
   },
   "author": "Evgeniy Demidov",
   "license": "UNLICENSED",
