@@ -6,12 +6,12 @@ const Example = () => {
     return (
         <>
             <CardHeadings
-                items={[
-                    {title: 'Заголовок 1', label: 'heading 1'},
-                    {title: 'Заголовок 2', label: 'heading 2'},
-                    {title: 'Заголовок 3', label: 'heading 3'},
-                    {title: 'Заголовок 4', label: 'heading 4'},
-                    {title: 'Заголовок 5', label: 'heading 5'},
+                headings={[
+                    {text: 'Заголовок 1', type: 'heading 1'},
+                    {text: 'Заголовок 2', type: 'heading 2'},
+                    {text: 'Заголовок 3', type: 'heading 3'},
+                    {text: 'Заголовок 4', type: 'heading 4'},
+                    {text: 'Заголовок 5', type: 'heading 5'},
                 ]}
             />
         </>

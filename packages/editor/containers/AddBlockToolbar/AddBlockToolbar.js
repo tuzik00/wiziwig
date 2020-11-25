@@ -1,12 +1,12 @@
 import React, {memo, useCallback, useEffect, useRef, useState} from 'react';
 
 import AddBlockToolbar from '@wiziwig/uikit/components/AddBlockToolbar';
-import {getSelectedBlockNode} from "@wiziwig/core/_src/utils/selection";
 import {useModal} from '@wiziwig/uikit/components/Modal';
-import blockToolbarButtons from "@wiziwig/configs/enums/blockToolbarButtons";
+import blockToolbarButtons from '@wiziwig/configs/enums/blockToolbarButtons';
 import BLOCK_TYPE from '@wiziwig/configs/enums/blockType';
 import IMAGE_VIEW_TYPE from '@wiziwig/configs/enums/imageViewType';
 
+import {getSelectedBlockNode} from '../../utils/selection';
 import {addNewBlock} from '../../utils/blocks';
 
 

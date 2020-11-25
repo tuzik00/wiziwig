@@ -3,9 +3,7 @@ import {DefaultDraftBlockRenderMap} from 'draft-js';
 
 import BLOCK_TYPE from '@wiziwig/configs/enums/blockType';
 
-/*
-Mapping that returns containers for the various block types.
-*/
+
 const RenderMap = Map({
     [BLOCK_TYPE.CAPTION]: {
         element: 'cite',

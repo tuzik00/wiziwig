@@ -1,5 +1,6 @@
-import {EditorState, ContentBlock, genKey} from 'draft-js';
+import {EditorState, ContentBlock, genKey, RichUtils, convertToRaw} from 'draft-js';
 import { Map, List } from 'immutable';
+import {insertNewUnstyledBlock} from 'draftjs-utils';
 
 
 export const getCurrentBlock = (editorState) => {
@@ -113,7 +114,9 @@ export const addNewBlock = (editorState, newType = 'unstyled', initialData = {})
             selectionAfter: selectionState,
         });
 
-        return EditorState.push(editorState, newContentState, 'change-block-type');
+        const newState = EditorState.push(editorState, newContentState, 'change-block-type');
+
+        return insertNewUnstyledBlock(newState);
     }
 
     return editorState;

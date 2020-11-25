@@ -4,7 +4,7 @@ import './CardHeadings.styl';
 
 const CardHeadings = (props) => {
     const {
-        items,
+        headings,
     } = props;
 
     return (
@@ -13,14 +13,14 @@ const CardHeadings = (props) => {
                 Оглавление:
             </div>
 
-            {items.map((item, index) => (
+            {headings.map((item, index) => (
                <div className={`${CardHeadings.displayName}__item`}>
                    {index + 1}. &nbsp;
                    <a
                        className={`${CardHeadings.displayName}__item-link`}
-                       href={`#${item.label}`}
+                       href={`#${item.type}`}
                    >
-                       {item.title}
+                       {item.text}
                    </a>
                </div>
             ))}
@@ -31,7 +31,7 @@ const CardHeadings = (props) => {
 CardHeadings.displayName = 'CardHeadings';
 
 CardHeadings.defaultProps = {
-    items: [],
+    headings: [],
 };
 
 export default CardHeadings;

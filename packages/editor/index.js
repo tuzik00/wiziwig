@@ -15,13 +15,15 @@ import EditorWrapper from './components/EditorWrapper';
 import InlineToolbar from './containers/InlineToolbar';
 import AddBlockToolbar from './containers/AddBlockToolbar';
 import {getCurrentBlock, addNewBlockAt, resetBlockWithType} from './utils/blocks';
-import keyBindingFn from './utils/keybinding';
-import blockRenderMap from './utils/blockRenderMap';
+import blockRenderMap from './blockRenderMap';
+import blockStyleFn from './blockStyleFn';
+import findHeadings from './utils/findHeadings';
 
 
 const Root = (props) => {
     const {
-        renderBlockFn
+        renderBlockFn,
+        renderHeadings,
     } = props;
 
     const editorRef = useRef(null);
@@ -31,9 +33,17 @@ const Root = (props) => {
     });
 
     const handleChangeState = useCallback((newEditorState) => {
-        console.log((convertToRaw(newEditorState.getCurrentContent())))
         setEditorState(newEditorState);
-    }, [editorState]);
+        renderHeadings(findHeadings(newEditorState));
+    }, []);
+
+    const handleChangeToolbar = useCallback((newEditorState) => {
+        handleChangeState(newEditorState);
+
+        setTimeout(() => {
+            editorRef.current.focus();
+        }, 0)
+    }, []);
 
     const handleReturn = useCallback((e) => {
         if (isSoftNewlineEvent(e)) {
@@ -116,8 +126,8 @@ const Root = (props) => {
                 ref={editorRef}
                 editorState={editorState}
                 blockRendererFn={renderBlockFn}
-                keyBindingFn={keyBindingFn}
                 blockRenderMap={blockRenderMap}
+                blockStyleFn={blockStyleFn}
                 handleReturn={handleReturn}
                 handleKeyCommand={handleKeyCommand}
                 onChange={handleChangeState}
@@ -125,15 +135,19 @@ const Root = (props) => {
 
             <InlineToolbar
                 editorState={editorState}
-                onToggle={handleChangeState}
+                onToggle={handleChangeToolbar}
             />
 
             <AddBlockToolbar
                 editorState={editorState}
-                onSelect={handleChangeState}
+                onSelect={handleChangeToolbar}
             />
         </EditorWrapper>
     )
+};
+
+Root.defaultProps = {
+    renderHeadings: () => {},
 };
 
 

@@ -7,6 +7,7 @@ import {
 
 import * as reduxBlocks from '@wiziwig/redux/modules/blocks';
 import * as reduxVersion from '@wiziwig/redux/modules/version';
+import * as reduxUI from '@wiziwig/redux/modules/ui';
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -18,6 +19,7 @@ export default (initialState = {}) => {
     const reducers = {
         version: reduxVersion.reducer,
         blocks: reduxBlocks.reducer,
+        ui: reduxUI.reducer,
     };
 
     const enhancer = compose(
