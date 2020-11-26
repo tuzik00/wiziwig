@@ -4,6 +4,10 @@ import {
     UPDATE_BLOCK,
 } from './types';
 
+import {
+    STATE_LOAD
+} from '../state/types';
+
 
 const initialState = [];
 
@@ -17,6 +21,11 @@ export default (state = initialState, action) => {
 
         case UPDATE_BLOCK:
             return updateBlock(state, action.meta.blockKey, action.payload);
+
+        case STATE_LOAD:
+            return [
+                ...action.payload.blocks,
+            ];
 
         default:
             return state;

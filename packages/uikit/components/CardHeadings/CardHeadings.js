@@ -20,12 +20,9 @@ const CardHeadings = (props) => {
                 >
                     {index + 1}. &nbsp;
 
-                    <a
-                        className={`${CardHeadings.displayName}__item-link`}
-                        href={`#${item.type}`}
-                    >
+                    <span className={`${CardHeadings.displayName}__item-link`}>
                         {item.text}
-                    </a>
+                    </span>
                 </div>
             ))}
         </div>

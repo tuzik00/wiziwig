@@ -1,11 +1,32 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Editor from '@wiziwig/core';
+import Button from '@wiziwig/uikit/components/Button';
+
+import demostate from './demostate.json';
 
 
 const Example = () => {
+    const [state, setState] = useState({});
+
     return (
         <>
-            <Editor/>
+            <div>
+                <Button
+                    color={'green'}
+                    onClick={() => {
+                        setState(demostate);
+                    }}
+                >
+                    Загрузить состояние
+                </Button>
+            </div>
+
+            <Editor
+                state={state}
+                onChange={(state) => {
+                    console.log(state)
+                }}
+            />
         </>
     )
 };

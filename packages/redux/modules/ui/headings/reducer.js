@@ -1,4 +1,5 @@
 import { SET_HEADING } from './types';
+import { STATE_LOAD } from '../../state/types';
 
 
 const initialState = {};
@@ -10,12 +11,17 @@ export default (state = initialState, action) => {
                 blockKey,
                 headings,
             } = action.payload;
-            console.log(blockKey, headings);
+
             return {
                 ...state,
                 [blockKey]: [
                     ...headings
                 ]
+            };
+
+        case STATE_LOAD:
+            return {
+                ...action.payload.headings
             };
         default:
             return state;

@@ -1,18 +1,32 @@
-import React, {memo} from 'react';
+import React, {memo, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+
 import Button from '@wiziwig/uikit/components/Button';
 import IconPlus from '@wiziwig/uikit/components/svg/plus.svg';
 import EditorWrapper from '@wiziwig/uikit/components/Layout/EditorWrapper';
 import {useModal} from '@wiziwig/uikit/components/Modal';
+
 import * as reduxBlocks from '@wiziwig/redux/modules/blocks';
+import * as reduxState from '@wiziwig/redux/modules/state';
 
 import BLOCK_TYPE from '@wiziwig/configs/enums/blockType';
+
 import CreateBlocks from '../CreateBlocks';
 import renderBlockFn from '../../renderBlockFn';
 
 
-const Root = () => {
+const Root = (props) => {
+    const {
+        state,
+    } = props;
+
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (state.blocks && state.blocks.length) {
+            dispatch(reduxState.actions.load(state));
+        }
+    }, [state]);
 
     const layoutBlockModal = useModal('layoutBlock', {
         onOk(block){
