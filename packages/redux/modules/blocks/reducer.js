@@ -1,5 +1,3 @@
-import cloneDeep from 'lodash/cloneDeep';
-
 import {
     INSERT_BLOCK,
     REMOVE_BLOCK,
@@ -55,10 +53,15 @@ function updateBlock(blocks, blockKey, data = {}, newState = []) {
             ...block,
             data: {
                 ...block.data,
-                ...data,
             },
             entities: [],
         };
+
+        if (block.key === blockKey) {
+            newBlock.data = {
+                ...data,
+            }
+        }
 
         newState.push(newBlock);
 

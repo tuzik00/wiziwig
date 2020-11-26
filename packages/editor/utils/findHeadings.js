@@ -1,10 +1,10 @@
-import {convertToRaw} from "draft-js";
 import BLOCK_TYPE from '@wiziwig/configs/enums/blockType';
 
 
-export default (editorState) => {
-    const currentContent = editorState.getCurrentContent();
-    const {blocks} = convertToRaw(currentContent);
+export default (rawState = {}) => {
+    const {
+        blocks = [],
+    } = rawState;
 
     return blocks.map((block) => {
         if (block.text &&

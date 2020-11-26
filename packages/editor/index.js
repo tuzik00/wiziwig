@@ -17,13 +17,12 @@ import AddBlockToolbar from './containers/AddBlockToolbar';
 import {getCurrentBlock, addNewBlockAt, resetBlockWithType} from './utils/blocks';
 import blockRenderMap from './blockRenderMap';
 import blockStyleFn from './blockStyleFn';
-import findHeadings from './utils/findHeadings';
 
 
 const Root = (props) => {
     const {
         renderBlockFn,
-        renderHeadings,
+        onChange,
     } = props;
 
     const editorRef = useRef(null);
@@ -34,7 +33,12 @@ const Root = (props) => {
 
     const handleChangeState = useCallback((newEditorState) => {
         setEditorState(newEditorState);
-        renderHeadings(findHeadings(newEditorState));
+
+        if (onChange) {
+            const content = newEditorState.getCurrentContent();
+            onChange(convertToRaw(content));
+        }
+
     }, []);
 
     const handleChangeToolbar = useCallback((newEditorState) => {
@@ -147,7 +151,7 @@ const Root = (props) => {
 };
 
 Root.defaultProps = {
-    renderHeadings: () => {},
+    onChange: () => {},
 };
 
 
