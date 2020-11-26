@@ -28,7 +28,7 @@ const Root = (props) => {
         onChange,
         onFocus,
     } = props;
-    console.log(isActive);
+
     const editorRef = useRef(null);
 
     const [editorState, setEditorState] = useState(() => {
