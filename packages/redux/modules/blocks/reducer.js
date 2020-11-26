@@ -45,22 +45,18 @@ function deleteBlock(blocks, blockKey, newState = []) {
     return newState;
 }
 
-function updateBlock(blocks, blockKey, data = {}, newState = []) {
+function updateBlock(blocks, blockKey, data, newState = []) {
     for (let key in blocks) {
         const block = blocks[key];
 
         const newBlock = {
             ...block,
-            data: {
-                ...block.data,
-            },
+            data: block.data,
             entities: [],
         };
 
         if (block.key === blockKey) {
-            newBlock.data = {
-                ...data,
-            }
+            newBlock.data = data
         }
 
         newState.push(newBlock);
@@ -73,10 +69,6 @@ function updateBlock(blocks, blockKey, data = {}, newState = []) {
     return newState;
 }
 
-// если масив пустой
-// если массив полный
-// если ключа нет
-// если ключ есть
 
 function insertBlock(blocks, blockKey = null, addBlock, newState = []) {
     if (blockKey) {
@@ -108,29 +100,6 @@ function insertBlock(blocks, blockKey = null, addBlock, newState = []) {
             ]
         }
     }
-
-    // if (!blockKey && !blocks.length) {
-    //     newState.push(addBlock);
-    //
-    //     return newState;
-    // }
-    //
-    // for (let key in blocks) {
-    //     const block = blocks[key];
-    //
-    //     const newBlock = {
-    //         ...block,
-    //         entities: [],
-    //     };
-    //
-    //     newState.push(newBlock);
-    //
-    //     insertBlock(block.entities, blockKey, addBlock, newBlock.entities);
-    //
-    //     if (block.key === blockKey) {
-    //         newBlock.entities.push(addBlock);
-    //     }
-    // }
 
     return newState;
 }

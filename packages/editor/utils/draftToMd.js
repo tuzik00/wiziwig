@@ -242,6 +242,13 @@ function draftBlock(block) {
 }
 
 function mdToDraftjs(editorBlocks, extraStyles) {
+    if (!editorBlocks.length) {
+        return {
+            blocks: [],
+            entityMap: {},
+        }
+    }
+
     return editorBlocks.reduce((accum, editorBlock) => {
         switch (editorBlock.type) {
             case BLOCK_TYPE.IMAGE:

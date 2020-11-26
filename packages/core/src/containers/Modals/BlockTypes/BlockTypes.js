@@ -10,10 +10,12 @@ const BlockTypes = (props) => {
     } = props;
 
     const productCreatorModal = useModal('productCreator', {
-        onOk(data){
+        onOk(list){
             modal.ok({
                 type: BLOCK_TYPE.PRODUCT_SLIDER,
-                data,
+                data: {
+                    list,
+                },
             })
         }
     });

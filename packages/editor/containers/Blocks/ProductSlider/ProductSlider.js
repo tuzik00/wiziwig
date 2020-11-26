@@ -5,8 +5,7 @@ import CardProduct from '@wiziwig/uikit/components/CardProduct';
 
 const _ProductSlider = (props) => {
     const {block} = props;
-    const list = block.getData().toJS();
-
+    const { list } = block.getData().toJS();
 
     return (
         <Slider>

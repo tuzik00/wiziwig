@@ -56,9 +56,7 @@ export const update = (props = {}) => {
 
     return {
         type: UPDATE_BLOCK,
-        payload: {
-            ...data,
-        },
+        payload: data,
         meta: {
             blockKey,
         }

@@ -26,6 +26,22 @@ export const getBlockEntitiesByKey = createSelector(
     }
 );
 
+export const getBlockDataByKey = createSelector(
+    blockList,
+    props,
+    (blocks, props) => {
+        const [block] = findBlock((item) => {
+            return item.key === props.blockKey
+        }, blocks);
+
+        if (block) {
+            return block.data;
+        }
+
+        return null;
+    }
+);
+
 
 function findBlock(predicate, arr, filteredArray = []) {
     for (let i = 0; i < arr.length; i++) {

@@ -1,6 +1,7 @@
 import React, {useRef, useState, useCallback, useEffect} from 'react';
 
 import {
+    convertFromRaw,
     convertToRaw,
     Editor,
     EditorState,
@@ -21,6 +22,7 @@ import blockStyleFn from './blockStyleFn';
 
 const Root = (props) => {
     const {
+        initState,
         renderBlockFn,
         onChange,
     } = props;
@@ -28,7 +30,10 @@ const Root = (props) => {
     const editorRef = useRef(null);
 
     const [editorState, setEditorState] = useState(() => {
-        return EditorState.createEmpty()
+        const contentState = convertFromRaw(initState);
+        const newEditorState = EditorState.createWithContent(contentState);
+
+        return newEditorState
     });
 
     const handleChangeState = useCallback((newEditorState) => {
