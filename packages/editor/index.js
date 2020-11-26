@@ -23,17 +23,17 @@ import blockStyleFn from './blockStyleFn';
 const Root = (props) => {
     const {
         initState,
+        isActive,
         renderBlockFn,
         onChange,
+        onFocus,
     } = props;
-
+    console.log(isActive);
     const editorRef = useRef(null);
 
     const [editorState, setEditorState] = useState(() => {
         const contentState = convertFromRaw(initState);
-        const newEditorState = EditorState.createWithContent(contentState);
-
-        return newEditorState
+        return EditorState.createWithContent(contentState);
     });
 
     const handleChangeState = useCallback((newEditorState) => {
@@ -140,23 +140,29 @@ const Root = (props) => {
                 handleReturn={handleReturn}
                 handleKeyCommand={handleKeyCommand}
                 onChange={handleChangeState}
+                onFocus={onFocus}
             />
 
-            <InlineToolbar
-                editorState={editorState}
-                onToggle={handleChangeToolbar}
-            />
+            {isActive && (
+                <>
+                    <InlineToolbar
+                        editorState={editorState}
+                        onToggle={handleChangeToolbar}
+                    />
 
-            <AddBlockToolbar
-                editorState={editorState}
-                onSelect={handleChangeToolbar}
-            />
+                    <AddBlockToolbar
+                        editorState={editorState}
+                        onSelect={handleChangeToolbar}
+                    />
+                </>
+            )}
         </EditorWrapper>
     )
 };
 
 Root.defaultProps = {
-    onChange: () => {},
+    onChange: () => {
+    },
 };
 
 

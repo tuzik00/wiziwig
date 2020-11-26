@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import Editor from '@wiziwig/editor';
 import * as reduxBlock from '@wiziwig/redux/modules/blocks';
 import * as reduxUI from '@wiziwig/redux/modules/ui';
-
 import mdToDraft from '@wiziwig/editor/utils/mdToDraft';
 import draftToMd from '@wiziwig/editor/utils/draftToMd';
 import findHeadings from '@wiziwig/editor/utils/findHeadings';
@@ -22,8 +21,16 @@ const ContentBlocks = (props) => {
     const [editorState, setEditorState] = useState(null);
     const debounceState = useDebounce(editorState, 500);
     const currentEditorState = useSelector((state) => {
-        return reduxBlock.selectors.getBlockDataByKey(state, { blockKey })
+        return reduxBlock.selectors.getBlockDataByKey(state, {blockKey})
     });
+
+    const activeEditorBlockKey = useSelector(reduxUI.activeEditor.selectors.state);
+
+    const setActiveEditor = useCallback((blockKey) => {
+        if (activeEditorBlockKey !== blockKey) {
+            dispatch(reduxUI.activeEditor.actions.setActive(blockKey));
+        }
+    }, [activeEditorBlockKey]);
 
     useEffect(() => {
         if (debounceState) {
@@ -44,7 +51,11 @@ const ContentBlocks = (props) => {
         <div>
             <Editor
                 initState={draftToMd(currentEditorState)}
+                isActive={blockKey === activeEditorBlockKey}
                 onChange={handleChangeEditor}
+                onFocus={() => {
+                    setActiveEditor(blockKey)
+                }}
                 renderBlockFn={renderBlockFn}
             />
         </div>
