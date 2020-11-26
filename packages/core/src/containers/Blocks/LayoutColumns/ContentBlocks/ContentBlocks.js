@@ -4,7 +4,8 @@ import Editor from '@wiziwig/editor';
 import * as reduxBlock from '@wiziwig/redux/modules/blocks';
 import * as reduxUI from '@wiziwig/redux/modules/ui';
 
-import markdownSerializer from '@wiziwig/editor/utils/markdownSerializer';
+import mdToDraft from '@wiziwig/editor/utils/mdToDraft';
+import draftToMd from '@wiziwig/editor/utils/draftToMd';
 import findHeadings from '@wiziwig/editor/utils/findHeadings';
 
 import useDebounce from '../../../../hoocks/useDebounce';
@@ -25,8 +26,9 @@ const ContentBlocks = (props) => {
         if (debounceState) {
             dispatch(reduxBlock.actions.update({
                 blockKey,
-                data: markdownSerializer(debounceState),
+                data: mdToDraft(debounceState),
             }));
+            console.log(draftToMd(mdToDraft(debounceState)));
 
             dispatch(reduxUI.headings.actions.setHeadings(blockKey, findHeadings(debounceState)));
         }
