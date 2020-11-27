@@ -1,7 +1,15 @@
-import {EditorState, ContentBlock, genKey, RichUtils, convertToRaw} from 'draft-js';
-import { Map, List } from 'immutable';
+import {EditorState, ContentBlock, genKey, SelectionState, Modifier} from 'draft-js';
+import {Map, List} from 'immutable';
 import {insertNewUnstyledBlock} from 'draftjs-utils';
 
+
+export const getBlockType = (editorState) => {
+    const contentState = editorState.getCurrentContent();
+    const selectionState = editorState.getSelection();
+    const blockType = contentState.getBlockForKey(selectionState.getAnchorKey()).getType();
+
+    return blockType;
+};
 
 export const getCurrentBlock = (editorState) => {
     const selectionState = editorState.getSelection();
@@ -122,3 +130,30 @@ export const addNewBlock = (editorState, newType = 'unstyled', initialData = {})
     return editorState;
 };
 
+
+export const removeBlock = (editorState, block) => {
+    if (!block) {
+        return editorState;
+    }
+    const blockKey = block.getKey();
+    const content = editorState.getCurrentContent();
+    const contentBlock = content.getBlockForKey(blockKey);
+
+    const targetRange = new SelectionState({
+        anchorKey: blockKey,
+        anchorOffset: 0,
+        focusKey: blockKey,
+        focusOffset: contentBlock.getLength(),
+    });
+
+    const withoutTeX = Modifier.removeRange(content, targetRange, 'backward');
+    const resetBlock = Modifier.setBlockType(
+        withoutTeX,
+        withoutTeX.getSelectionAfter(),
+        'unstyled'
+    );
+
+    const newState = EditorState.push(editorState, resetBlock, 'remove-range');
+
+    return EditorState.forceSelection(newState, resetBlock.getSelectionAfter());
+};

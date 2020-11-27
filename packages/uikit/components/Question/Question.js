@@ -10,6 +10,8 @@ const Question = (props) => {
         question,
         onAnswer,
         isAnswered,
+        onFocus,
+        onBlur,
     } = props;
 
     const [value, setValue] = useState('');
@@ -24,6 +26,7 @@ const Question = (props) => {
                 {question}
             </div>
             <br/>
+
             {!isAnswered
                 ? (
                     <div className={`${Question.displayName}__answer`}>
@@ -32,6 +35,8 @@ const Question = (props) => {
                             onChange={(e) => {
                                 setValue(e.target.value);
                             }}
+                            onFocus={onFocus}
+                            onBlur={onBlur}
                         />
                         &nbsp;
                         <Button

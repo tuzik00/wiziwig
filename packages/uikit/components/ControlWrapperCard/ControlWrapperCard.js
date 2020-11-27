@@ -11,41 +11,44 @@ const ControlWrapperCard = (props) => {
         onChange,
         onDelete,
         isLeft,
+        disabled,
     } = props;
 
     return (
         <div className={ControlWrapperCard.displayName}>
             {children}
 
-            <div className={cn(`${ControlWrapperCard.displayName}__controls`, {
-                [`${ControlWrapperCard.displayName}__controls_left`]: isLeft,
-            })}>
-                {onChange && (
-                    <div
-                        className={`${ControlWrapperCard.displayName}__tools`}
-                        onClick={onChange}
-                    >
-                        <IconTools
-                            width={15}
-                            height={15}
-                            fill={'white'}
-                        />
-                    </div>
-                )}
+            {!disabled && (
+                <div className={cn(`${ControlWrapperCard.displayName}__controls`, {
+                    [`${ControlWrapperCard.displayName}__controls_left`]: isLeft,
+                })}>
+                    {onChange && (
+                        <div
+                            className={`${ControlWrapperCard.displayName}__tools`}
+                            onClick={onChange}
+                        >
+                            <IconTools
+                                width={15}
+                                height={15}
+                                fill={'white'}
+                            />
+                        </div>
+                    )}
 
-                {onDelete && (
-                    <div
-                        className={`${ControlWrapperCard.displayName}__remove`}
-                        onClick={onDelete}
-                    >
-                        <IconDustbin
-                            width={15}
-                            height={15}
-                            fill={'white'}
-                        />
-                    </div>
-                )}
-            </div>
+                    {onDelete && (
+                        <div
+                            className={`${ControlWrapperCard.displayName}__remove`}
+                            onClick={onDelete}
+                        >
+                            <IconDustbin
+                                width={15}
+                                height={15}
+                                fill={'white'}
+                            />
+                        </div>
+                    )}
+                </div>
+            )}
         </div>
     );
 };

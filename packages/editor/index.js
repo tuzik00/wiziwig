@@ -3,7 +3,6 @@ import React, {useRef, useState, useCallback, useEffect} from 'react';
 import {
     convertFromRaw,
     convertToRaw,
-    Editor,
     EditorState,
     RichUtils,
 } from 'draft-js';
@@ -12,6 +11,7 @@ import isSoftNewlineEvent from "draft-js/lib/isSoftNewlineEvent";
 
 import BLOCK_TYPE, {HANDLED, NOT_HANDLED} from '@wiziwig/configs/enums/blockType';
 
+import Editor from './components/Editor';
 import EditorWrapper from './components/EditorWrapper';
 import InlineToolbar from './containers/InlineToolbar';
 import AddBlockToolbar from './containers/AddBlockToolbar';
@@ -141,21 +141,21 @@ const Root = (props) => {
                 handleKeyCommand={handleKeyCommand}
                 onChange={handleChangeState}
                 onFocus={onFocus}
-            />
+            >
+                {isActive && (
+                    <>
+                        <InlineToolbar
+                            editorState={editorState}
+                            onToggle={handleChangeToolbar}
+                        />
 
-            {isActive && (
-                <>
-                    <InlineToolbar
-                        editorState={editorState}
-                        onToggle={handleChangeToolbar}
-                    />
-
-                    <AddBlockToolbar
-                        editorState={editorState}
-                        onSelect={handleChangeToolbar}
-                    />
-                </>
-            )}
+                        <AddBlockToolbar
+                            editorState={editorState}
+                            onSelect={handleChangeToolbar}
+                        />
+                    </>
+                )}
+            </Editor>
         </EditorWrapper>
     )
 };

@@ -8,6 +8,7 @@ import IMAGE_VIEW_TYPE from '@wiziwig/configs/enums/imageViewType';
 
 import {getSelectedBlockNode} from '../../utils/selection';
 import {addNewBlock} from '../../utils/blocks';
+import {getBlockType} from '../../utils/blocks';
 
 
 const _AddBlockToolbar = (props) => {
@@ -97,12 +98,12 @@ const _AddBlockToolbar = (props) => {
     useEffect(() => {
         const contentState = editorState.getCurrentContent();
         const selectionState = editorState.getSelection();
-        const selectionBlock = contentState.getBlockForKey(selectionState.getAnchorKey()).getType().indexOf('atomic');
+        const blockType = getBlockType(editorState);
 
         if (
             !selectionState.isCollapsed() ||
             selectionState.anchorKey !== selectionState.focusKey ||
-            selectionBlock >= 0
+            [BLOCK_TYPE.QUESTION, BLOCK_TYPE.PRODUCT_SLIDER, BLOCK_TYPE.IMAGE].includes(blockType)
         ) {
             hideBlock();
 
@@ -114,7 +115,6 @@ const _AddBlockToolbar = (props) => {
 
         if (block.getLength() > 0) {
             hideBlock();
-
             return;
         }
 

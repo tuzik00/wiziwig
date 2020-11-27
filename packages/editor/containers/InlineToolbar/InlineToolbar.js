@@ -4,7 +4,9 @@ import {getSelectionInlineStyle, getSelectedBlocksType} from 'draftjs-utils';
 
 import InlineToolbar from '@wiziwig/uikit/components/InlineToolbar';
 import inlineToolbarButtons from '@wiziwig/configs/enums/inlineToolbarButtons';
+import BLOCK_TYPE from '@wiziwig/configs/enums/blockType';
 import {getSelection, getSelectionRect} from '../../utils/selection';
+import {getBlockType} from '../../utils/blocks';
 
 
 const _InlineToolbar = (props) => {
@@ -19,13 +21,16 @@ const _InlineToolbar = (props) => {
         return !editorState.getSelection().isCollapsed();
     }, [editorState]);
 
-
     const activeSelectionStyles = useMemo(() => {
         const selectionInlineStyle = getSelectionInlineStyle(editorState);
-        const usedSelectionInlineStyles = Object.keys(selectionInlineStyle)
+        const usedSelectionInlineStyles = Object
+            .keys(selectionInlineStyle)
             .filter((item) => selectionInlineStyle[item]);
 
-        return [getSelectedBlocksType(editorState), ...usedSelectionInlineStyles]
+        return [
+            getSelectedBlocksType(editorState),
+            ...usedSelectionInlineStyles,
+        ]
     }, [editorState]);
 
     const [position, setPosition] = useState({left: 0, right: 0});
@@ -44,8 +49,9 @@ const _InlineToolbar = (props) => {
         }
 
         const nativeSelection = getSelection(window);
+        const blockType = getBlockType(editorState);
 
-        if (!nativeSelection.rangeCount) {
+        if (!nativeSelection.rangeCount || [BLOCK_TYPE.QUESTION, BLOCK_TYPE.PRODUCT_SLIDER, BLOCK_TYPE.IMAGE].includes(blockType)) {
             return;
         }
 

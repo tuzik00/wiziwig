@@ -5,6 +5,8 @@ import './Input.styl';
 const Input = (props) => {
     const {
         onChange,
+        onFocus,
+        onBlur,
         placeholder,
         value,
     } = props;
@@ -16,6 +18,8 @@ const Input = (props) => {
             type="text"
             className={Input.displayName}
             onInput={onChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
         />
     )
 };
