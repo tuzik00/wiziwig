@@ -17,7 +17,7 @@
             {
               "type": "image",
               "data": {
-                "src": "blob:http://localhost:9001/f0020031-6542-4a66-9079-a009c9714fee",
+                "src": "https://akiwa.ru/upload/iblock/194/19407178cdfdc06dcb4551b5deadc37d.jpg",
                 "viewType": "full_width"
               }
             },
@@ -49,7 +49,7 @@
             {
               "type": "image",
               "data": {
-                "src": "blob:http://localhost:9001/a111dd05-d1ef-4148-9d49-fdd06d1bd87f",
+                "src": "https://akiwa.ru/upload/iblock/194/19407178cdfdc06dcb4551b5deadc37d.jpg",
                 "viewType": "normal"
               }
             },
@@ -70,7 +70,7 @@
             {
               "type": "image",
               "data": {
-                "src": "blob:http://localhost:9001/59929eef-fe11-45a3-9695-957ad89fa80c",
+                "src": "https://akiwa.ru/upload/iblock/194/19407178cdfdc06dcb4551b5deadc37d.jpg",
                 "viewType": "full_width"
               }
             }
@@ -106,7 +106,7 @@
       "key": "block_15",
       "type": "layout:image",
       "data": {
-        "src": "blob:http://localhost:9001/33288543-3009-4d49-aa50-6d7942585c70"
+        "src": "https://akiwa.ru/upload/iblock/194/19407178cdfdc06dcb4551b5deadc37d.jpg"
       },
       "entities": []
     },

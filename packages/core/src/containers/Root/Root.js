@@ -23,7 +23,7 @@ const Root = (props) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (state.blocks && state.blocks.length) {
+        if (state && state.blocks && state.blocks.length) {
             dispatch(reduxState.actions.load(state));
         }
     }, [state]);
