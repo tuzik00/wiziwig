@@ -11,6 +11,20 @@ export const getBlockType = (editorState) => {
     return blockType;
 };
 
+export const getPrevBlock = (editorState) => {
+    const content = editorState.getCurrentContent();
+    const blockMap = content.getBlockMap();
+    const blockKey = getCurrentBlock(editorState).getKey();
+    const index = blockMap.keySeq().findIndex(k => k === blockKey);
+    const prevBlock = blockMap.toList().toJS()[index - 1];
+
+    if (!prevBlock) {
+        return null;
+    }
+
+    return blockMap.get(prevBlock.key);
+};
+
 export const getCurrentBlock = (editorState) => {
     const selectionState = editorState.getSelection();
     const contentState = editorState.getCurrentContent();
@@ -52,9 +66,11 @@ export const addNewBlockAt = (
     const content = editorState.getCurrentContent();
     const blockMap = content.getBlockMap();
     const block = blockMap.get(pivotBlockKey);
+
     if (!block) {
         throw new Error(`The pivot key - ${pivotBlockKey} is not present in blockMap.`);
     }
+
     const blocksBefore = blockMap.toSeq().takeUntil((v) => (v === block));
     const blocksAfter = blockMap.toSeq().skipUntil((v) => (v === block)).rest();
     const newBlockKey = genKey();
@@ -135,6 +151,7 @@ export const removeBlock = (editorState, block) => {
     if (!block) {
         return editorState;
     }
+
     const blockKey = block.getKey();
     const content = editorState.getCurrentContent();
     const contentBlock = content.getBlockForKey(blockKey);

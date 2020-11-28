@@ -1,4 +1,4 @@
-export default {
+const BLOCK_TYPE = {
     MARKDOWN: 'markdown', // data = {content = string}
     IMAGE: 'image', // data = {id = number, description = 'string', view_type = 'IMAGE_VIEW_TYPE', 'img' = 'src'}
     LAYOUT_COLUMNS: 'layout:columns', // data = view_type = LAYOUT_VIEW_TYPE
@@ -8,7 +8,6 @@ export default {
     WIDGET_USER: 'widget:user',
     WIDGET_NAVIGATION: 'widget:navigation',
     PRODUCT_SLIDER: 'product_slider',
-
     QUESTION: 'question',
     UNSTYLED: 'unstyled',
     PARAGRAPH: 'unstyled',
@@ -30,5 +29,6 @@ export default {
     BREAK: 'atomic:break',
 };
 
+export default BLOCK_TYPE;
 export const HANDLED = 'handled';
 export const NOT_HANDLED = 'not_handled';

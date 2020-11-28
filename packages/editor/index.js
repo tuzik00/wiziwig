@@ -5,6 +5,8 @@ import {
     convertToRaw,
     EditorState,
     RichUtils,
+    Modifier,
+    ContentState,
 } from 'draft-js';
 
 import isSoftNewlineEvent from "draft-js/lib/isSoftNewlineEvent";
@@ -15,7 +17,7 @@ import Editor from './components/Editor';
 import EditorWrapper from './components/EditorWrapper';
 import InlineToolbar from './containers/InlineToolbar';
 import AddBlockToolbar from './containers/AddBlockToolbar';
-import {getCurrentBlock, addNewBlockAt, resetBlockWithType} from './utils/blocks';
+import {getCurrentBlock, addNewBlockAt, resetBlockWithType, removeBlock, getPrevBlock} from './utils/blocks';
 import blockRenderMap from './blockRenderMap';
 import blockStyleFn from './blockStyleFn';
 
@@ -43,8 +45,24 @@ const Root = (props) => {
             const content = newEditorState.getCurrentContent();
             onChange(convertToRaw(content));
         }
-
     }, []);
+
+    const handlePastedText = useCallback((text, html) => {
+        const pastedBlocks = ContentState.createFromText(text).blockMap;
+
+        const newState = Modifier.replaceWithFragment(
+            editorState.getCurrentContent(),
+            editorState.getSelection(),
+            pastedBlocks,
+        );
+
+        const newEditorState = EditorState.push(editorState, newState, "insert-fragment");
+
+        handleChangeState(newEditorState);
+
+        return HANDLED;
+
+    }, [editorState]);
 
     const handleChangeToolbar = useCallback((newEditorState) => {
         handleChangeState(newEditorState);
@@ -115,6 +133,19 @@ const Root = (props) => {
     }, [editorState]);
 
     const handleKeyCommand = useCallback((command) => {
+        if (command === 'backspace') {
+            const prevBlock = getPrevBlock(editorState);
+            const currentBlock = getCurrentBlock(editorState);
+            const index = editorState.getSelection().getStartOffset();
+
+            if ((currentBlock.getLength() === 0 || index === 0) && prevBlock && [BLOCK_TYPE.IMAGE, BLOCK_TYPE.PRODUCT_SLIDER, BLOCK_TYPE.QUESTION].includes(prevBlock.getType())) {
+                handleChangeState(removeBlock(editorState, prevBlock));
+                return HANDLED
+            }
+
+            return NOT_HANDLED
+        }
+
         const newState = RichUtils.handleKeyCommand(editorState, command);
 
         if (newState) {
@@ -133,10 +164,12 @@ const Root = (props) => {
         <EditorWrapper>
             <Editor
                 ref={editorRef}
+                spellCheck
                 editorState={editorState}
                 blockRendererFn={renderBlockFn}
                 blockRenderMap={blockRenderMap}
                 blockStyleFn={blockStyleFn}
+                handlePastedText={handlePastedText}
                 handleReturn={handleReturn}
                 handleKeyCommand={handleKeyCommand}
                 onChange={handleChangeState}
