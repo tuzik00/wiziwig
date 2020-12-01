@@ -43,6 +43,7 @@ const Root = (props) => {
 
         if (onChange) {
             const content = newEditorState.getCurrentContent();
+            console.log(convertToRaw(content))
             onChange(convertToRaw(content));
         }
     }, []);
